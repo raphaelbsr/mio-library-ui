@@ -1,22 +1,14 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+export { default as ActionDialog } from './components/ActionDialog';
+export { default as Table } from './components/Table';
 
-import styles from './styles.css'
+// import Foo from './Foo'
+// import Bar from './Bar'
 
-export default class ExampleComponent extends Component {
-  static propTypes = {
-    text: PropTypes.string
-  }
+// // export Foo and Bar as named exports
+// export { Foo, Bar }
 
-  render() {
-    const {
-      text
-    } = this.props
+// // alternative, more concise syntax for named exports
+// // export { default as Foo } from './Foo'
 
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
-  }
-}
+// // you can optionally also set a default export for your module
+// export default { Foo, Bar }
