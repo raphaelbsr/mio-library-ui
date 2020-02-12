@@ -1,4 +1,5 @@
 export { default as ActionDialog } from './components/ActionDialog';
+export { default as LabelValue } from './components/LabelValue';
 export { default as Table } from './components/Table';
 
 // import Foo from './Foo'
