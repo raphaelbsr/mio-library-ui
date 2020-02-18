@@ -1,5 +1,7 @@
 export { default as ActionDialog } from './components/ActionDialog';
 export { default as LabelValue } from './components/LabelValue';
+export { default as FullDialog } from './components/FullDialog';
+export { default as TransferList } from './components/TransferList';
 export { default as Table } from './components/Table';
 
 // import Foo from './Foo'

@@ -1,4 +1,3 @@
-<br />
 <p align="center">
   <a href="https://rocketseat.com.br">
     <img width="256" src="https://datac-mio.s3-sa-east-1.amazonaws.com/LogoMio.png" alt="Logo">
@@ -16,6 +15,7 @@
 - [Componentes ToDo](#componentes-todo)
 - [Docs](#docs)
   - [&lt;ActionDialog />](#actiondialog)
+  - [&lt;FullDialog />](#fulldialog)
 
 ## Sobre o Projeto
 
@@ -55,6 +55,8 @@ export default class App extends Component {
 
 - [ActionDialog](#actiondialog) O componente ActionDialog exibe um caixa de diálogo para o usuário executar alguma ação
 
+- [FullDialog](#fulldialog) FullDialog abre uma caixa de diálogo que pode ser considerada como um painel que preenche toda tela. Seu uso é ideal para interfaces mais complexas.
+
 ## Componentes ToDo
 
 Lista de componentes que ainda precisão ser implementados
@@ -79,5 +81,17 @@ O componente aceita as seguintes propriedades.
 | onCancelClick  | function                | Uma função callback para ser executada quando o usuário clicar no botão Cancelar. Geralmente é usado para fechar o Dialog                                                                                                                                                  |
 | customActions  | elemento                | O Componente DialogActions provê por padrão dois botões de ação, caso você queira utilizar seus próprios botões de ação basta definir seu componente nessa propriedade. Se fizer isso as propriedades onOkClick, onCancelClick, okLabel, cancelLabel não serão utilizadas. |
 | children       | elemento                | Conteúdo do Dialog.                                                                                                                                                                                                                                                        |
+
+### &lt;FullDialog />
+
+FullDialog abre uma caixa de diálogo que pode ser considerada como um painel que preenche toda tela. Seu uso é ideal para interfaces mais complexas.
+
+O componente aceita as seguintes propriedades.
+
+| Nome    | Tipo                   | Descrição                                                                                                                              |
+| ------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| isOpen  | boolean (Obrigatório)  | Quando o valor for "true" o dialog será exibido.                                                                                       |
+| title   | string (Obrigatório)   | Título do Dialog exibido.                                                                                                              |
+| onClose | function (Obrigatório) | Uma função callback que é disparada quando o usuário demonstra intenção de fechar o Dialog clicando no ícone fechar ou fora do Dialog. |
 
 MIT © [raphaelbsr](https://github.com/raphaelbsr)
