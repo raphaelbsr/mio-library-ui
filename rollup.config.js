@@ -31,9 +31,17 @@ export default {
     svgr(),
     babel({
       exclude: 'node_modules/**',
-      plugins: ['external-helpers']
+      plugins: ['external-helpers'],
+      runtimeHelpers: true
     }),
     resolve(),
-    commonjs()
+    commonjs(
+      {
+        include: 'node_modules/**',
+        namedExports: {
+          'node_modules/react-is/index.js': ['isFragment', 'ForwardRef', 'Memo']
+        }
+      }
+    )
   ]
 };

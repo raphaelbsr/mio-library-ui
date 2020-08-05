@@ -1,6 +1,6 @@
 {
   "name": "mio-library-ui",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Componentes de interface de usuário baseado na material-ui para linha de aplicativos mio",
   "author": "raphaelbsr",
   "license": "MIT",
@@ -23,6 +23,8 @@
   },
   "peerDependencies": {
     "@material-ui/core": "^4.9.1",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "prop-types": "^15.6.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
@@ -61,6 +63,7 @@
   ],
   "dependencies": {
     "@material-ui/core": "^4.9.1",
-    "@material-ui/icons": "^4.9.1"
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56"
   }
 }

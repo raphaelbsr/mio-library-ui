@@ -3,6 +3,7 @@ export { default as LabelValue } from './components/LabelValue';
 export { default as FullDialog } from './components/FullDialog';
 export { default as TransferList } from './components/TransferList';
 export { default as Table } from './components/Table';
+export { default as AutoComplete } from './components/AutoComplete';
 
 // import Foo from './Foo'
 // import Bar from './Bar'

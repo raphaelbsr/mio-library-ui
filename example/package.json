@@ -5,12 +5,11 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "mio-library-ui": "link:..",
     "prop-types": "^15.6.2",
     "react": "link:../node_modules/react",
     "react-dom": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-scripts": "^1.1.4",
-    "mio-library-ui": "link:.."
+    "react-scripts": "^1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
