@@ -3,7 +3,7 @@
   "homepage": "https://raphaelbsr.github.io/mio-library-ui",
   "version": "0.0.0",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "dependencies": {
     "mio-library-ui": "link:..",
     "prop-types": "^15.6.2",

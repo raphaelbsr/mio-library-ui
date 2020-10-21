@@ -1,36 +1,53 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import {
   // ActionDialog,
   // LabelValue,
   // FullDialog,
   // TransferList,
-  AutoComplete
+  // AutoComplete,
+  // TelefoneTextField
+  // PasswordTextField
+  PageHeader,
+  Searchable,
 } from 'mio-library-ui';
 
-export default class App extends Component {
-  render() {
-    const leftData = [
-      { id: 1, nome: 'Registro 1' },
-      { id: 2, nome: 'Registro 2' },
-      { id: 3, nome: 'Registro 3' }
-    ];
+import { makeStyles } from '@material-ui/core'
 
-    const rightData = [{ id: 4, nome: 'Registro 4' }];
+const useStyles = makeStyles(theme => ({
+  root: {
+    '& label.Mui-focused': {
+      color: '#1A9',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#1A9',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#1A9',
+      },
+      '&:hover fieldset': {
+        borderColor: '#1A9',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#1A9',
+      },
+    },
+  }
+}))
 
-    const handleSearch = async (query) => {
-      if (query.length > 0) {
-        console.log('mquery' + query)
-        return leftData
-      }
-      return []
-    }
+const App = () => {
 
-    return (
-      <div>
-        {/* <ActionDialog isOpen={true}>Testando</ActionDialog> */}
-        {/* <Table /> */}
-        {/* <LabelValue label="Label" value="Value" />
+  return (
+    <div>
+      <PageHeader title="Cabeçalho" subtitle="SubTítulo">
+        <Searchable />
+      </PageHeader>
+      {/* <TelefoneTextField value="3234214167"></TelefoneTextField> */}
+
+      {/* <ActionDialog isOpen={true} okLabel="SIM" >Testando</ActionDialog> */}
+      {/* <Table /> */}
+      {/* <LabelValue label="Label" value="Value" />
         <FullDialog isOpen={false} title="Full Dialog" />
         {
           <TransferList
@@ -40,16 +57,35 @@ export default class App extends Component {
           />
         } */}
 
-        <AutoComplete
-          renderOptions={(options) => options.map((option) => option.id + ' - ' + option.nome)}
-          onChange={(value) => console.log('on change ' + value)}
-          onSearch={handleSearch}
-          inputProps={{ label: "Cidades", margin: "normal", variant: "outlined" }}
-        >
+      {/* <AutoComplete
+        renderOption={(option) => option.nome}
+        onChange={(e, value) => console.log(value)}
+        onSearch={handleSearch}
+        inputProps={{
+          label: "Cidades",
+          margin: "normal",
+          variant: "outlined",
+          className: classes.root
+        }}
+        multiple={false}
+        value={cidades[0]}
+      // getOptionSelected={(option, value) => {
+      //   return option.id === value.id
+      // }}
+      >
+      </AutoComplete> */}
 
-        </AutoComplete>
+      {/* <PasswordTextField
+          value={this.setState.senha}
+          onChange={(e) => this.setState({ senha: e.target.value })}
+          fullWidth
+          variant="outlined"
+          label="Senha"
+          placeholder="Utilize uma senha segura">
+        </PasswordTextField> */}
 
-      </div >
-    );
-  }
+    </div >
+  );
 }
+
+export default App

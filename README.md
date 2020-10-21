@@ -1,21 +1,21 @@
 <p align="center">
   <a href="https://rocketseat.com.br">
-    <img width="256" src="https://datac-mio.s3-sa-east-1.amazonaws.com/LogoMio.png" alt="Logo">
+    <img width="256" src="https://datac-mio.s3-sa-east-1.amazonaws.com/LogoMio.png" alt="Logo"/>
   </a>
   <h3 align="center">MIO Library UI</h3>
 </p>
 
 ## Tabela de Conteúdo
 
-- [Tabela de Conteúdo](#tabela-de-conte%c3%bado)
+- [Tabela de Conteúdo](#tabela-de-conteúdo)
 - [Sobre o Projeto](#sobre-o-projeto)
-- [Instalação](#instala%c3%a7%c3%a3o)
+- [Instalação](#instalação)
 - [Guia de Uso](#guia-de-uso)
 - [Componentes](#componentes)
 - [Componentes ToDo](#componentes-todo)
 - [Docs](#docs)
-  - [&lt;ActionDialog />](#actiondialog)
-  - [&lt;FullDialog />](#fulldialog)
+  - [&lt;ActionDialog />](#actiondialog-)
+  - [&lt;FullDialog />](#fulldialog-)
 
 ## Sobre o Projeto
 

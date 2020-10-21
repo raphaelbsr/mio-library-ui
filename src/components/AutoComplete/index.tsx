@@ -6,27 +6,27 @@ import PropTypes from 'prop-types';
 
 var isActive = true
 
-const AutoComplete = (props) => {
-  const {
-    onChange,
-    renderOptions,
-    inputProps,
-    onSearch,
-    time } = props
+const AutoComplete = ({
+  renderOption,
+  onChange,
+  onSearch,
+  extraParams,
+  time,
+  inputProps,
+  ...rest
+}) => {
   const [options, setOptions] = useState([])
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
     setLoading(true);
-    debouncedSearch.current(inputValue)
-  }, [inputValue, onSearch])
+    debouncedSearch.current(inputValue, extraParams)
+  }, [extraParams, inputValue, onSearch])
 
-
-  const search = async (query) => {
+  const search = async (query, params) => {
     if (isActive) {
-      console.log('Searching Active')
-      const result = await onSearch(query)
+      const result = await onSearch(query, params)
       setOptions(result)
     } else {
       isActive = true
@@ -36,10 +36,10 @@ const AutoComplete = (props) => {
 
   const change = (e, newValue) => {
     isActive = false
-    onChange(newValue)
+    onChange(e, newValue)
   }
 
-  const debounced = _.debounce(search, time)
+  const debounced = _.debounce(search, time, extraParams)
   const debouncedSearch = useRef(debounced)
 
   return <Autocomplete
@@ -47,7 +47,8 @@ const AutoComplete = (props) => {
     onInputChange={(event, newValue) => {
       setInputValue(newValue)
     }}
-    options={renderOptions(options)}
+    options={options}
+    getOptionLabel={renderOption}
     renderInput={(params) => (
       <TextField
         {...params}
@@ -63,25 +64,29 @@ const AutoComplete = (props) => {
         }}
       />
     )}
-    // autoComplete
-    includeInputInList
-    filterSelectedOptions
+    {...rest}
   />
 };
 
 AutoComplete.propTypes = {
   onChange: PropTypes.func,
-  renderOptions: PropTypes.func,
+  renderOption: PropTypes.func,
+  renderGroup: PropTypes.func,
+  groupBy: PropTypes.func,
   inputProps: PropTypes.object,
   onSearch: PropTypes.func.isRequired,
-  time: PropTypes.number
+  time: PropTypes.number,
+  extraParams: PropTypes.any,
+  multiple: PropTypes.bool
 }
 
 AutoComplete.defaultProps = {
   inputProps: { label: "Label", margin: "normal", variant: "outlined" },
-  renderOptions: ((options) => options.map(option => option)),
+  renderOption: ((option) => option),
   onChange: () => { },
   time: 500,
+  extraParams: undefined,
+  multiple: false
 }
 
 export default AutoComplete;

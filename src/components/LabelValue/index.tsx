@@ -2,7 +2,13 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Typography } from '@material-ui/core';
 
-const LabelValue = ({ label, value, valueComponent }) => {
+interface LabelValueProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
+  label: string,
+  value: string,
+  valueComponent: React.ReactElement
+}
+
+const LabelValue: React.FC<LabelValueProps> = ({ label, value, valueComponent }) => {
   const useStyles = makeStyles(theme => ({
     box: {
       display: 'flex',
@@ -11,10 +17,8 @@ const LabelValue = ({ label, value, valueComponent }) => {
     },
     label: {
       paddingRight: theme.spacing(1)
-      //fontWeight: 'bolder'
     },
     value: {
-      // padding: theme.spacing(2)
     }
   }));
 
@@ -24,8 +28,7 @@ const LabelValue = ({ label, value, valueComponent }) => {
       <Typography
         className={classes.label}
         variant="subtitle1"
-        component="span"
-      >
+        component="span">
         {label}:
       </Typography>
       <Typography
