@@ -1,3 +1,4 @@
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import typescript from 'rollup-plugin-typescript2';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
@@ -23,6 +24,7 @@ export default {
     }
   ],
   plugins: [
+    peerDepsExternal(),
     typescript(),
     external(),
     postcss({
@@ -32,7 +34,7 @@ export default {
     svgr(),
     babel({
       exclude: 'node_modules/**',
-      plugins: ['external-helpers'],
+      plugins: ['@babel/external-helpers'],
       runtimeHelpers: true
     }),
     resolve(),

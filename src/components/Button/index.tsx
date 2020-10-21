@@ -1,11 +1,13 @@
 import React from 'react'
 
 import { Button as MuiButton, CircularProgress } from '@material-ui/core'
-import { ButtonProps as MuiButtonProps } from '@material-ui/core/Button';
+// import { ButtonProps as MuiButtonProps } from '@material-ui/core/Button';
 
-interface ButtonProps extends MuiButtonProps {
+interface ButtonProps {
+  /**
+   * Essa é uma descrição do Botao
+   */
   isLoading: boolean,
-  children: React.ReactNode
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
@@ -16,6 +18,10 @@ const Button: React.FC<ButtonProps> = (props) => {
       : children
     }
   </MuiButton >
+}
+
+Button.defaultProps = {
+  isLoading: false
 }
 
 export default Button

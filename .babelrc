@@ -1,7 +1,7 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
         "modules": false,
         "spec": true,
@@ -10,6 +10,7 @@
         "corejs": 3
       }
     ],
+    ["@babel/preset-react"],
     // ["es2015", { "modules": false }],
     "react",
     "stage-0"
@@ -20,6 +21,7 @@
       {
         "regenerator": true
       }
-    ]
+    ],
+    "@babel/plugin-proposal-object-rest-spread"
   ]
 }

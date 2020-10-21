@@ -1,0 +1,45 @@
+---
+name: Button
+menu: Components
+---
+
+import { Playground, Props } from 'docz';
+import Button from './index.tsx';
+
+# Button
+
+Button é um componente baseado no [Button do Material-UI](https://material-ui.com/components/buttons/).
+
+Sua implementação encapsula a exibição de uma barra circular de progresso para indicar que há um processamento acontecendo quando o usuário realiza a ação de clique.
+
+## Properties
+
+<Props of={Button} />
+
+## Uso básico
+
+<Playground>
+  <Button variant="contained">Padrão</Button>
+</Playground>
+
+## Uso com feedback de processamento
+
+<Playground>
+  {() => {
+    const [isLoading, setIsLoading] = React.useState(false);
+    const handleClick = () => {
+      setIsLoading(true);
+      setTimeout(() => {
+        /*
+        / O setTimeout está simulando o processamento de alguma operação
+        */
+        setIsLoading(false);
+      }, 3000);
+    };
+    return (
+      <Button variant="contained" isLoading={isLoading} onClick={handleClick}>
+        Salvar
+      </Button>
+    );
+  }}
+</Playground>

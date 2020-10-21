@@ -1,0 +1,40 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "extends": [
+    "react-app",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "plugins": ["react"],
+  "rules": {
+    "import/prefer-default-export": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "no-underscore-dangle": "off",
+    "eslint-disable-next-line": "off",
+    "hooks/exhaustive-deps": "off"
+
+    // don't force es6 functions to include space before paren
+    // "space-before-function-paren": 0,
+
+    // allow specifying true explicitly for boolean props
+    // "react/jsx-boolean-value": 0
+  }
+}
