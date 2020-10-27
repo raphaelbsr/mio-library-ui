@@ -1,21 +1,31 @@
 ---
 name: ButtonBox
-menu: Components
+menu: Componentes
 ---
 
 import { Playground, Props } from 'docz';
 import ButtonBox from './index.tsx';
+import Button from '../Button/index.tsx';
 
 # ButtonBox
 
-Buttons make common actions more obvious and help users more easily perform them. Buttons use labels and sometimes icons to communicate the action that will occur when the user touches them.
+ButtonBox é um container para organizar os Buttons.
+Segundo a guideline do MIO os botões são sempre dispostos da direita pra esquerda
 
-## Properties
+## Propriedades
 
 <Props of={ButtonBox} />
 
-## Basic usage
+## Uso Básico
 
 <Playground>
-  <ButtonBox>Botao aqui</ButtonBox>
+  <ButtonBox buttonsWidth={150}>
+    <Button variant="contained">Botão 1</Button>
+    <Button variant="contained" color="primary">
+      Botão 2
+    </Button>
+    <Button variant="contained" color="secondary">
+      Botão 3
+    </Button>
+  </ButtonBox>
 </Playground>

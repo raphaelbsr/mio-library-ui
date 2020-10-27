@@ -4,16 +4,36 @@ import { makeStyles } from '@material-ui/core/styles'
 
 interface ButtonBoxProps {
   children: React.ReactNode,
+  /**
+   * Espaçamento do top
+   * paddingTop
+   */
   top?: number,
+  /**
+   * Espaçamento da margem direita
+   * paddingRight
+   */
   right?: number,
+  /**
+   * Espaçamento inferior
+   * paddingBottom
+   */
   bottom?: number,
+  /**
+   * Espaçamento da margem esquerda
+   * paddingLeft
+   */
   left?: number,
+  /**
+   * Tamanho da largura que os botão irão ter,
+   * O valor padrão é "auto"
+   */
   buttonsWidth?: number | string,
 }
 
 const ButtonBox: React.FC<ButtonBoxProps> = ({
-  buttonsWidth,
   children,
+  buttonsWidth,
   top,
   right,
   bottom,

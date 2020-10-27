@@ -2,10 +2,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Typography } from '@material-ui/core';
 
-interface LabelValueProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
+interface LabelValueProps {
   label: string,
-  value: string,
-  valueComponent: React.ReactElement
+  value?: string,
+  valueComponent?: React.ReactElement
 }
 
 const LabelValue: React.FC<LabelValueProps> = ({ label, value, valueComponent }) => {

@@ -1,0 +1,47 @@
+---
+name: FullDialog
+menu: Componentes
+---
+
+import { Playground, Props } from 'docz';
+import FullDialog from './index.tsx';
+import Button from '../Button/index.tsx';
+import ContentContainer from '../ContentContainer/index.tsx';
+
+# FullDialog
+
+Um Diálogo é um tipo de janela modal que aparece na frente do conteúdo do aplicativo para fornecer informações críticas ou solicitar uma decisão. As caixas de diálogo desativam toda a funcionalidade do aplicativo quando elas são exibidas e permanecem na tela até que sejam confirmadas, rejeitadas ou que uma ação necessária tenha sido executada.
+
+Os diálogos são intencionalmente interruptivos, então eles devem ser usados com moderação.
+
+## Propriedades
+
+<Props of={FullDialog} />
+
+## Uso Básico
+
+<Playground>
+  {() => {
+    const [isOpen, setIsOpen] = React.useState(false);
+    const abrirFullDialog = () => {
+      setIsOpen(true);
+    };
+    const fecharFullDialog = () => {
+      setIsOpen(false);
+    };
+    return (
+      <div>
+        <FullDialog
+          isOpen={isOpen}
+          onClose={fecharFullDialog}
+          title="Full Dialog"
+        >
+          Olá, seja bem vindo ao FullDialog
+        </FullDialog>
+        <Button variant="contained" onClick={abrirFullDialog}>
+          Abrir Dialog
+        </Button>
+      </div>
+    );
+  }}
+</Playground>

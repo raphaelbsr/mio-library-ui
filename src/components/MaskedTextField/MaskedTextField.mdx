@@ -1,0 +1,30 @@
+---
+name: MaskedTextField
+menu: Componentes
+---
+
+import { Playground, Props } from 'docz';
+import MaskedTextField from './index.tsx';
+
+# MaskedTextField
+
+O MaskedTextField é um componente de Input que aceita uma máscara para formatar os valores
+
+## Propriedades
+
+<Props of={MaskedTextField} />
+
+## Uso básico
+
+<Playground>
+  {() => {
+    const [telefone, setTelefone] = React.useState("3234214141");
+    const onChange = (e) => {
+      setTelefone(e.target.value)
+    };
+    return (
+      <MaskedTextField value={telefone} mask="(99) 9999-9999" onChange={onChange} variant="outlined"/>
+    );
+  }}
+
+</Playground>

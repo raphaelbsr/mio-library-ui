@@ -5,7 +5,7 @@ import { Button as MuiButton, CircularProgress } from '@material-ui/core'
 
 interface ButtonProps {
   /**
-   * Essa é uma descrição do Botao
+   * Quando o valor for true, o texto do botão será substituído por uma barra de progresso para indicar que há um processamento em execução.
    */
   isLoading: boolean,
 }

@@ -1,0 +1,48 @@
+---
+name: ActionDialog
+menu: Componentes
+---
+
+import { Playground, Props } from 'docz';
+import ActionDialog from './index.tsx';
+import Button from '../Button/index.tsx';
+import ContentContainer from '../ContentContainer/index.tsx';
+
+# ActionDialog
+
+Um Diálogo é um tipo de janela modal que aparece na frente do conteúdo do aplicativo para fornecer informações críticas ou solicitar uma decisão. As caixas de diálogo desativam toda a funcionalidade do aplicativo quando elas são exibidas e permanecem na tela até que sejam confirmadas, rejeitadas ou que uma ação necessária tenha sido executada.
+
+Os diálogos são intencionalmente interruptivos, então eles devem ser usados com moderação.
+
+## Propriedades
+
+<Props of={ActionDialog} />
+
+## Uso Básico
+
+<Playground>
+  {() => {
+    const [isOpen, setIsOpen] = React.useState(false);
+    const abrirActionDialog = () => {
+      setIsOpen(true);
+    };
+    const fecharActionDialog = () => {
+      setIsOpen(false);
+    };
+    return (
+      <div>
+        <ActionDialog
+          isOpen={isOpen}
+          onCancelClick={fecharActionDialog}
+          onOkClick={fecharActionDialog}
+          title="Action Dialog"
+        >
+          Clique em algum dos botões abaixo para fechar
+        </ActionDialog>
+        <Button variant="contained" onClick={abrirActionDialog}>
+          Abrir Dialog
+        </Button>
+      </div>
+    );
+  }}
+</Playground>

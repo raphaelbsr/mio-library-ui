@@ -1,10 +1,12 @@
 import React from 'react';
 
 import { makeStyles } from "@material-ui/core/styles";
+// import { BoxProps } from "@material-ui/core/Box";
+
 import { Box } from '@material-ui/core'
 
 interface ContentContainerProps {
-  children: React.ReactNode
+
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -13,9 +15,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const ContentContainer: React.FC<ContentContainerProps> = ({ children }) => {
+const ContentContainer: React.FC<ContentContainerProps> = ({ children, ...rest }) => {
   const classes = useStyles();
-  return <Box className={classes.contentContainer}>
+  return <Box className={classes.contentContainer} {...rest}>
     {children}
   </Box>;
 }

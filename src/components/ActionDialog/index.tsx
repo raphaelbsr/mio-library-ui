@@ -8,21 +8,24 @@ import {
   Button
 } from '@material-ui/core';
 // import PropTypes from 'prop-types';
-
-import { DialogProps } from '@material-ui/core/Dialog/'
+// import { DialogProps } from '@material-ui/core/Dialog/'
+import PageHeader from '../PageHeader';
 
 interface ActionProps {
-  onOkClick?: any,
-  onCancelClick?: any,
+  onClose: any,
+  onOkClick: any,
+  onCancelClick: any,
   cancelLabel?: string,
   okLabel?: string,
   isOkProcessing?: boolean,
 }
 
-interface ActionDialogProps extends DialogProps {
+interface ActionDialogProps {
+  title?: string,
+  onClose: any,
   isOpen: boolean,
-  onOkClick?: any,
-  onCancelClick?: any,
+  onOkClick: any,
+  onCancelClick: any,
   cancelLabel?: string,
   okLabel?: string,
   isOkProcessing?: boolean,
@@ -53,30 +56,16 @@ const ActionDialog: React.FC<ActionDialogProps> = props => {
   const { isOpen, title, children, customActions, onClose, ...rest } = props;
   return (
     <MuiDialog fullWidth maxWidth="sm" open={isOpen} onClose={onClose} {...rest}>
-      <MuiDialogTitle>{title}</MuiDialogTitle>
+      {title && <MuiDialogTitle>
+        <PageHeader title={title}></PageHeader>
+      </MuiDialogTitle>}
       <MuiDialogContent>{children}</MuiDialogContent>
       {customActions ? customActions : <Actions {...props} />}
     </MuiDialog>
   );
 };
 
-// ActionDialog.propTypes = {
-//   isOpen: PropTypes.bool.isRequired,
-//   onClose: PropTypes.func.isRequired,
-//   children: PropTypes.element.isRequired,
-//   title: PropTypes.string,
-//   customActions: PropTypes.element,
-//   onOkClick: PropTypes.func,
-//   onCancelClick: PropTypes.func,
-//   okLabel: PropTypes.string,
-//   cancelLabel: PropTypes.string,
-//   isOkProcessing: PropTypes.bool.isRequired
-// };
-
 ActionDialog.defaultProps = {
-  title: 'Action Dialog',
-  onOkClick: () => { },
-  onCancelClick: () => { },
   okLabel: 'Ok',
   cancelLabel: 'Cancelar',
   isOkProcessing: false

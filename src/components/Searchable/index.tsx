@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import {
-  Box,
   Grow,
   IconButton,
   TextField,
@@ -15,17 +14,18 @@ import KeyboardEventHandler from 'react-keyboard-event-handler';
 import _ from "lodash";
 
 interface SearchableProps extends React.InputHTMLAttributes<React.ReactFragment> {
-  onSearch?: any,
-  searching: boolean
+  onSearch: { <T>(query: string): Array<T> };
+  searching?: boolean;
+  time?: number;
 }
 
 const Searchable: React.FC<SearchableProps> = (props) => {
 
   const [isOpen, setIsOpen] = useState(false)
   const [growIn, setGrowIn] = useState(false)
-  const { onSearch, searching } = props
+  const { onSearch, searching, time } = props
 
-  const debouncedHandleTextChange = useCallback(_.debounce(query => onSearch(query), 1000), [onSearch])
+  const debouncedHandleTextChange = useCallback(_.debounce(query => onSearch(query), time), [onSearch])
 
   const handleTextChange = event => {
     debouncedHandleTextChange(event.target.value);
@@ -40,7 +40,7 @@ const Searchable: React.FC<SearchableProps> = (props) => {
     setTimeout(() => { setIsOpen(false) }, 500)
   }
 
-  const onKeyDown = event => {
+  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Escape') {
       fecharCaixaDePesquisa();
     }
@@ -49,7 +49,7 @@ const Searchable: React.FC<SearchableProps> = (props) => {
   return <React.Fragment>
     <KeyboardEventHandler
       handleKeys={['ctrl+p']}
-      onKeyEvent={(key, e) => abrirCaixaDePesquisa()} />
+      onKeyEvent={(key: string, e: React.KeyboardEvent<HTMLInputElement>) => abrirCaixaDePesquisa()} />
     <IconButton
       size="small"
       color="primary"
@@ -88,6 +88,6 @@ const Searchable: React.FC<SearchableProps> = (props) => {
 
 Searchable.defaultProps = {
   searching: false,
-  onSearch: () => { }
+  time: 500
 }
 export default Searchable;
