@@ -1,9 +1,27 @@
 {
   "presets": [
-    ["env", {
-      "modules": false
-    }],
-    "stage-0",
-    "react"
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "spec": true,
+        "forceAllTransforms": true,
+        "useBuiltIns": "usage",
+        "corejs": 3
+      }
+    ],
+    ["@babel/preset-react"],
+    // ["es2015", { "modules": false }],
+    "react",
+    "stage-0"
+  ],
+  "plugins": [
+    [
+      "transform-runtime",
+      {
+        "regenerator": true
+      }
+    ],
+    "@babel/plugin-proposal-object-rest-spread"
   ]
 }

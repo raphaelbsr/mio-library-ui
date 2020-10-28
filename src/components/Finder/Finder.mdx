@@ -1,0 +1,41 @@
+---
+name: Finder
+menu: Componentes
+---
+
+import { Playground, Props } from 'docz';
+import ContentContainer from '../ContentContainer/index.tsx';
+import Finder from './index.tsx';
+
+# Finder
+
+O Finder é um componente para ser utilizado preferencialmente junto com o PageHeader.
+
+Ele contém um ícone que indica uma busca, que ao ser clicado expande para um input.
+
+<Props of={Finder} />
+
+## Uso básico
+
+<Playground>
+  {() => {
+    const frutas = ['pêra', 'uva', 'maçã', 'banana', 'morango'];
+    const [listaDeFrutas, setListaDeFrutas] = React.useState(frutas);
+    const handleSearch = query => {
+      const novaListaDeFrutas = frutas.filter(fruta => fruta.includes(query));
+      setListaDeFrutas(novaListaDeFrutas);
+    };
+    return (
+      <ContentContainer>
+        <div styles="width: 300px">
+          <Finder onSearch={handleSearch} />
+          <ul>
+            {listaDeFrutas.map(fruta => {
+              return <li>{fruta}</li>;
+            })}
+          </ul>
+        </div>
+      </ContentContainer>
+    );
+  }}
+</Playground>

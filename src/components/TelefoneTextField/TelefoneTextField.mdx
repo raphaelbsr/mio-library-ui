@@ -1,0 +1,65 @@
+---
+name: TelefoneTextField
+menu: Componentes
+---
+
+import { Playground, Props } from 'docz';
+import TelefoneTextField, { TIPO_TELEFONE } from './index.tsx';
+
+# TelefoneTextField
+
+O TelefoneTextField é um componente TextField customizado para aceitar e tratar números de telefone.
+
+## Propriedades
+
+<Props of={TelefoneTextField} />
+
+## Uso Básico
+
+<Playground>
+  {() => {
+    const [telefone, setTelefone] = React.useState({
+      [TIPO_TELEFONE.FIXO]: '',
+      [TIPO_TELEFONE.CELULAR]: '',
+      [TIPO_TELEFONE.INDEFINIDO]: ''
+    });
+    const handleChange = (e, tipo) => {
+      console.log(tipo);
+      console.log(telefone);
+      telefone[tipo] = e.target.value;
+      setTelefone({ ...telefone });
+    };
+    return (
+      <div>
+        <div>
+          <TelefoneTextField
+            value={telefone[TIPO_TELEFONE.FIXO]}
+            onChange={e => handleChange(e, TIPO_TELEFONE.FIXO)}
+            label="Telefone Fixo"
+            tipo={TIPO_TELEFONE.FIXO}
+            variant="outlined"
+          />
+        </div>
+        <br />
+        <div>
+          <TelefoneTextField
+            value={telefone[TIPO_TELEFONE.CELULAR]}
+            onChange={e => handleChange(e, TIPO_TELEFONE.CELULAR)}
+            label="Telefone Móvel"
+            tipo={TIPO_TELEFONE.CELULAR}
+            variant="outlined"
+          />
+        </div>
+        <br />
+        <div>
+          <TelefoneTextField
+            value={telefone[TIPO_TELEFONE.INDEFINIDO]}
+            onChange={e => handleChange(e, TIPO_TELEFONE.INDEFINIDO)}
+            label="Telefone/Celular"
+            variant="outlined"
+          />
+        </div>
+      </div>
+    );
+  }}
+</Playground>

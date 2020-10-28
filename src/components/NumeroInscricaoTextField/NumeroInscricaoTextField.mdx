@@ -1,0 +1,66 @@
+---
+name: NumeroInscricaoTextField
+menu: Componentes
+---
+
+import { Playground, Props } from 'docz';
+import NumeroInscricaoTextField, { TIPO_DOCUMENTO } from './index.tsx';
+
+# NumeroInscricaoTextField
+
+O NumeroInscricaoTextField é um componente TextField customizado para aceitar e tratar números de CPF e CNPJ.
+
+## Propriedades
+
+<Props of={NumeroInscricaoTextField} />
+
+## Uso Básico
+
+<Playground>
+  {() => {
+    const [numeroInscricao, setNumeroInscricao] = React.useState({
+      [TIPO_DOCUMENTO.CPF]: '',
+      [TIPO_DOCUMENTO.CNPJ]: '',
+      [TIPO_DOCUMENTO.INDEFINIDO]: ''
+    });
+
+    const handleChange = (e, tipo) => {
+      numeroInscricao[tipo] = e.target.value;
+      setNumeroInscricao({ ...numeroInscricao });
+    };
+
+    return (
+      <div>
+        <div>
+          <NumeroInscricaoTextField
+            value={numeroInscricao[TIPO_DOCUMENTO.CPF]}
+            onChange={e => handleChange(e, TIPO_DOCUMENTO.CPF)}
+            label="CPF"
+            tipo={TIPO_DOCUMENTO.CPF}
+            variant="outlined"
+          />
+        </div>
+        <br />
+        <div>
+          <NumeroInscricaoTextField
+            value={numeroInscricao[TIPO_DOCUMENTO.CNPJ]}
+            onChange={e => handleChange(e, TIPO_DOCUMENTO.CNPJ)}
+            label="CNPJ"
+            tipo={TIPO_DOCUMENTO.CNPJ}
+            variant="outlined"
+          />
+        </div>
+        <br />
+        <div>
+          <NumeroInscricaoTextField
+            value={numeroInscricao[TIPO_DOCUMENTO.INDEFINIDO]}
+            onChange={e => handleChange(e, TIPO_DOCUMENTO.INDEFINIDO)}
+            label="CPF OU CNPJ"
+            tipo={TIPO_DOCUMENTO.INDEFINIDO}
+            variant="outlined"
+          />
+        </div>
+      </div>
+    );
+  }}
+</Playground>
