@@ -1,11 +1,13 @@
 name: Docz
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     name: Build Docz
-    if: contains( github.ref, 'master')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -14,4 +16,5 @@ jobs:
         with:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
+      - run: yarn add docz
       - run: yarn docz:build
