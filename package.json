@@ -98,6 +98,7 @@
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@types/lodash": "^4.14.162",
     "@types/react-input-mask": "^2.0.5",
+    "cpf-cnpj-validator": "^1.0.3",
     "docz": "^2.3.1",
     "react-input-mask": "^2.0.4",
     "react-keyboard-event-handler": "^1.5.4",

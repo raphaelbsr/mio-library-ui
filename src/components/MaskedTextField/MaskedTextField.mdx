@@ -18,12 +18,12 @@ O MaskedTextField é um componente de Input que aceita uma máscara para formata
 
 <Playground>
   {() => {
-    const [telefone, setTelefone] = React.useState("3234214141");
+    const [cep, setCep] = React.useState("36500032");
     const onChange = (e) => {
-      setTelefone(e.target.value)
+      setCep(e.target.value)
     };
     return (
-      <MaskedTextField value={telefone} mask="(99) 9999-9999" onChange={onChange} variant="outlined"/>
+      <MaskedTextField value={cep} mask="99999-999" onChange={onChange} variant="outlined"/>
     );
   }}
 

@@ -10,16 +10,16 @@ import {
   Search as SearchIcon,
   Close as CloseIcon
 } from "@material-ui/icons/";
-import KeyboardEventHandler from 'react-keyboard-event-handler';
+// import KeyboardEventHandler from 'react-keyboard-event-handler';
 import _ from "lodash";
 
-interface SearchableProps extends React.InputHTMLAttributes<React.ReactFragment> {
+interface FinderProps extends React.InputHTMLAttributes<React.ReactFragment> {
   onSearch: { <T>(query: string): Array<T> };
   searching?: boolean;
   time?: number;
 }
 
-const Searchable: React.FC<SearchableProps> = (props) => {
+const Finder: React.FC<FinderProps> = (props) => {
 
   const [isOpen, setIsOpen] = useState(false)
   const [growIn, setGrowIn] = useState(false)
@@ -47,9 +47,9 @@ const Searchable: React.FC<SearchableProps> = (props) => {
   };
 
   return <React.Fragment>
-    <KeyboardEventHandler
+    {/* <KeyboardEventHandler
       handleKeys={['ctrl+p']}
-      onKeyEvent={(key: string, e: React.KeyboardEvent<HTMLInputElement>) => abrirCaixaDePesquisa()} />
+      onKeyEvent={(key: string, e: React.KeyboardEvent<HTMLInputElement>) => abrirCaixaDePesquisa()} /> */}
     <IconButton
       size="small"
       color="primary"
@@ -86,8 +86,8 @@ const Searchable: React.FC<SearchableProps> = (props) => {
   </React.Fragment>
 };
 
-Searchable.defaultProps = {
+Finder.defaultProps = {
   searching: false,
   time: 500
 }
-export default Searchable;
+export default Finder;

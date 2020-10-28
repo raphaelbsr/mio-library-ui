@@ -3,17 +3,30 @@ import React, { useState, useEffect, ReactFragment } from 'react';
 import MaskedTextField from "../MaskedTextField";
 import ErrorMessage from "../ErrorMessage";
 
-enum TIPO_TELEFONE {
-  TIPO_INDEFINIDO = "INDEFINIDO",
-  TIPO_FIXO = "FIXO",
-  TIPO_CELULAR = "CELULAR"
+interface TelefoneTextFieldProps extends React.InputHTMLAttributes<ReactFragment> {
+  /**
+   * O tipo do telefone define qual máscara será utilizada
+   * FIXO utiliza a máscara (99) 9999-9999
+   * CELULAR utiliza a máscara (99) 9 9999-9999
+   * INDEFINIDO define automaticamente a máscara no momento em que o input recebe o valor
+   */
+  tipo?: TIPO_TELEFONE;
+  validationErrors?: any;
+  disabled?: boolean;
+  value: string;
+  // rest: any,
 }
 
-interface TelefoneTextFieldProps extends React.InputHTMLAttributes<ReactFragment> {
-  tipo: TIPO_TELEFONE
-  ddd: string,
-  numero: string,
-  validationErrors: any
+export enum TIPO_TELEFONE {
+  INDEFINIDO = "INDEFINIDO",
+  FIXO = "FIXO",
+  CELULAR = "CELULAR"
+}
+
+export enum MASCARA {
+  INTERMEDIARIA = "(99) 9999-99999",
+  FIXO = "(99) 9999-9999",
+  CELULAR = "(99) 9 9999-9999"
 }
 
 const formatarTelefone = (numero: string) => {
@@ -61,58 +74,74 @@ const TelefoneTextField: React.FC<TelefoneTextFieldProps> = ({
   onChange,
   ...rest }) => {
 
-  const [mask, setMask] = useState("(99) 9999-9999");
+  const [mask, setMask] = useState<MASCARA>(MASCARA.FIXO);
 
   useEffect(() => {
-    const definirMascara = (telefone: string | number | readonly string[]) => {
+    definirMascara(value)
+  }, [tipo])
 
-      if (tipo === TIPO_TELEFONE.TIPO_INDEFINIDO) {
-        return
-      }
+  const definirMascara = (telefone: string) => {
 
-      if (tipo === TIPO_TELEFONE.TIPO_FIXO) {
-        setMask("(99) 9999-9999")
-        return
-      }
-
-      if (tipo === TIPO_TELEFONE.TIPO_CELULAR) {
-        setMask("(99) 9 9999-9999")
-        return
-      }
-
+    if (tipo === TIPO_TELEFONE.FIXO) {
+      setMask(MASCARA.FIXO)
+      return
     }
 
-    definirMascara(value)
-  }, [value, tipo])
+    if (tipo === TIPO_TELEFONE.CELULAR) {
+      setMask(MASCARA.CELULAR)
+      return
+    }
+  }
 
   const beforeMaskedValueChange = (newState: any, oldState: any, userInput: any) => {
 
+    let selection = newState.selection;
     if (userInput) {
       let newStart = newState.selection.start;
       let oldStart = oldState.selection.start;
-      if (newStart === 14 && oldStart === 13) {
-        setMask("(99) 9 9999-9999")
+
+      if (newStart < 13 && mask !== MASCARA.FIXO) {
+        setMask(MASCARA.FIXO)
       }
+
+      if (newStart === 13 && oldStart === 12) {
+        setMask(MASCARA.FIXO)
+      }
+
+      if (newStart === 14 && oldStart === 13) {
+        setMask(MASCARA.INTERMEDIARIA)
+      }
+
+      if (newStart === 15 && oldStart === 14) {
+        setMask(MASCARA.CELULAR)
+        selection = { start: 16, end: 16 }
+      }
+
     }
     const { value: nValue } = newState;
-    const selection = newState.selection;
     return {
       value: nValue,
       selection
     };
-
   }
 
   const mensagemDeErro = obterErro(name, validationErrors);
   return <React.Fragment>
     <MaskedTextField
       mask={mask}
-      beforeMaskedValueChange={beforeMaskedValueChange}
+      beforeMaskedValueChange={tipo === TIPO_TELEFONE.INDEFINIDO && beforeMaskedValueChange}
+      value={value}
+      onChange={onChange}
       {...rest}
     />
     {mensagemDeErro && <ErrorMessage error={mensagemDeErro} />}
   </React.Fragment>
 
 };
+
+TelefoneTextField.defaultProps = {
+  disabled: false,
+  tipo: TIPO_TELEFONE.INDEFINIDO
+}
 
 export default TelefoneTextField;

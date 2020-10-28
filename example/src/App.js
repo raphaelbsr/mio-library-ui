@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   // ActionDialog,
@@ -6,10 +6,10 @@ import {
   // FullDialog,
   // TransferList,
   // AutoComplete,
-  // TelefoneTextField
+  TelefoneTextField,
+  NumeroInscricaoTextField,
   // PasswordTextField
-  PageHeader,
-  Searchable,
+  //PageHeader,
 } from 'mio-library-ui';
 
 import { makeStyles } from '@material-ui/core'
@@ -38,12 +38,31 @@ const useStyles = makeStyles(theme => ({
 
 const App = () => {
 
+  const [telefone, setTelefone] = useState('')
+  const handleChangeTelefone = (e) => {
+    setTelefone(e.target.value)
+  }
+
+  const [numeroInscricao, setNumeroInscricao] = useState('')
+  const handleChangeNumeroInscricao = (e) => {
+    setNumeroInscricao(e.target.value)
+  }
   return (
     <div>
-      <PageHeader title="Cabeçalho" subtitle="SubTítulo">
-        <Searchable />
-      </PageHeader>
-      {/* <TelefoneTextField value="3234214167"></TelefoneTextField> */}
+      {/* <PageHeader title="Cabeçalho" subtitle="SubTítulo">
+      </PageHeader> */}
+      <TelefoneTextField
+        size="small"
+        value={telefone}
+        onChange={handleChangeTelefone}
+        variant="outlined"></TelefoneTextField>
+
+
+      <NumeroInscricaoTextField
+        size="small"
+        value={numeroInscricao}
+        onChange={handleChangeNumeroInscricao}
+        variant="outlined"></NumeroInscricaoTextField>
 
       {/* <ActionDialog isOpen={true} okLabel="SIM" >Testando</ActionDialog> */}
       {/* <Table /> */}
