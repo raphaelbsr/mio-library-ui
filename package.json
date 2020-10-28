@@ -21,7 +21,7 @@
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build",
     "docz:dev": "docz dev",
-    "docz:build": "docz build",
+    "docz:build": "docz build --dest docs",
     "docz:serve": "docz build && docz serve"
   },
   "peerDependencies": {
