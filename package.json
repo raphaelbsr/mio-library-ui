@@ -58,7 +58,6 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@rollup/plugin-commonjs": "^15.1.0",
-    "@storybook/addon-docs": "^6.0.26",
     "@svgr/rollup": "^2.4.1",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
