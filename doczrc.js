@@ -1,5 +1,6 @@
 export default {
   typescript: true,
+  base: '/doc',
   menu: [
     'Mio Library UI',
     'Readme',
