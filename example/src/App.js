@@ -10,6 +10,7 @@ import {
   NumeroInscricaoTextField,
   // PasswordTextField
   //PageHeader,
+  formatarTelefone,
 } from 'mio-library-ui';
 
 import { makeStyles } from '@material-ui/core'
@@ -38,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 
 const App = () => {
 
-  const [telefone, setTelefone] = useState('')
+  const [telefone, setTelefone] = useState('3234214167')
   const handleChangeTelefone = (e) => {
     setTelefone(e.target.value)
   }
@@ -49,6 +50,7 @@ const App = () => {
   }
   return (
     <div>
+      {formatarTelefone(telefone)}
       {/* <PageHeader title="Cabeçalho" subtitle="SubTítulo">
       </PageHeader> */}
       <TelefoneTextField

@@ -15,6 +15,10 @@ export { default as Button } from './components/Button';
 export { default as ContentContainer } from './components/ContentContainer';
 export { default as ContentDivider } from './components/ContentDivider';
 
+
+export * from './utils'
+// export { default as formatarTelefone } from './utils/formatarTelefone'
+
 // import Foo from './Foo'
 // import Bar from './Bar'
 

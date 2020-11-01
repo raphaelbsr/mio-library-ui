@@ -29,7 +29,8 @@ interface ActionDialogProps {
   cancelLabel?: string,
   okLabel?: string,
   isOkProcessing?: boolean,
-  customActions: React.ReactNode
+  customActions: React.ReactNode,
+  rest: ActionProps
 }
 
 const Actions: React.FC<ActionProps> = props => {
@@ -55,12 +56,12 @@ const Actions: React.FC<ActionProps> = props => {
 const ActionDialog: React.FC<ActionDialogProps> = props => {
   const { isOpen, title, children, customActions, onClose, ...rest } = props;
   return (
-    <MuiDialog fullWidth maxWidth="sm" open={isOpen} onClose={onClose} {...rest}>
+    <MuiDialog fullWidth maxWidth="sm" open={isOpen} onClose={onClose}>
       {title && <MuiDialogTitle>
         <PageHeader title={title}></PageHeader>
       </MuiDialogTitle>}
       <MuiDialogContent>{children}</MuiDialogContent>
-      {customActions ? customActions : <Actions {...props} />}
+      {customActions ? customActions : <Actions {...props} {...rest} />}
     </MuiDialog>
   );
 };
