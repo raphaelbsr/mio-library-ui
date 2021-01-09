@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { TextField, IconButton, InputAdornment } from '@material-ui/core'
 import { Visibility, VisibilityOff } from '@material-ui/icons'
 
-const PasswordTextField = (props) => {
+const PasswordTextField = (props: any) => {
   const [isVisible, switchVisible] = useState(false)
   const handleClickShowPassword = () => {
     switchVisible(!isVisible)

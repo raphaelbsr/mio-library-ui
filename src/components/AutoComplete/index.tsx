@@ -41,6 +41,7 @@ const AutoComplete = ({
   extraParams,
   time,
   inputProps,
+  value,
   ...rest
 }) => {
   const [options, setOptions] = useState([])
@@ -71,8 +72,17 @@ const AutoComplete = ({
   const debouncedSearch = useRef(debounced)
 
   return <Autocomplete
+    // onOpen={() => debouncedSearch.current(inputValue, extraParams)}
+    clearOnEscape={true}
     onChange={change}
-    onInputChange={(event, newValue) => {
+    value={value}
+    inputValue={inputValue}
+    onInputChange={(event, newValue, reason) => {
+      if (reason === 'clear') {
+        isActive = true
+        setOptions([])
+        search(newValue, extraParams)
+      }
       setInputValue(newValue)
     }}
     options={options}

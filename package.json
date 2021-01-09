@@ -1,6 +1,6 @@
 {
   "name": "mio-library-ui",
-  "version": "1.1.3",
+  "version": "1.1.10",
   "description": "Componentes de interface de usuário baseado na material-ui para linha de aplicativos mio",
   "author": "raphaelbsr",
   "license": "MIT",
@@ -33,7 +33,8 @@
     "react-dom": "^17.0.0",
     "react-input-mask": "^2.0.4",
     "react-keyboard-event-handler": "^1.5.4",
-    "typescript": "^4.0.3"
+    "typescript": "^4.0.3",
+    "@unicef/material-ui-currency-textfield": "^0.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
@@ -97,6 +98,7 @@
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@types/lodash": "^4.14.162",
     "@types/react-input-mask": "^2.0.5",
+    "@unicef/material-ui-currency-textfield": "^0.8.6",
     "cpf-cnpj-validator": "^1.0.3",
     "react-input-mask": "^2.0.4",
     "react-keyboard-event-handler": "^1.5.4",
