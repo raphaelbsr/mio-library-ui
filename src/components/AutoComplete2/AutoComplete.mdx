@@ -1,0 +1,57 @@
+---
+name: AutoComplete
+route: /auto-complete
+menu: Componentes
+---
+
+import { Playground, Props } from 'docz';
+import AutoComplete from './index.tsx';
+
+# AutoComplete
+
+O [autocomplete](https://material-ui.com/components/autocomplete/) é uma entrada de texto normal aprimorada por um painel de opções sugeridas.
+
+## Propriedades
+
+<Props of={AutoComplete} />
+
+## Uso básico
+
+<Playground>
+  {() => {
+    const estados = [
+      {
+        sigla: 'MG',
+        nome: 'Minas Gerais'
+      },
+      {
+        sigla: 'RJ',
+        nome: 'Rio de Janeiro'
+      },
+      {
+        sigla: 'SP',
+        nome: 'São Paulo'
+      }
+    ];
+    const handleSearch = query => {
+      if (query) {
+        return estados.filter(estado => estado.nome.includes(query));
+      }
+      return estados;
+    };
+    const handleChange = (e, newValue) => {
+      console.log(newValue);
+    };
+    const renderOption = estado => {
+      return `${estado.sigla} - ${estado.nome}`;
+    };
+    return (
+      <AutoComplete
+        variant="contained"
+        onSearch={handleSearch}
+        onChange={handleChange}
+        renderOption={renderOption}
+      ></AutoComplete>
+    );
+  }}
+</Playground>

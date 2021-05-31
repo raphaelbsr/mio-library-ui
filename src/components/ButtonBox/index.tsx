@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@material-ui/core';
+import { Box, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 
 interface ButtonBoxProps {
@@ -29,33 +29,35 @@ interface ButtonBoxProps {
    * O valor padrão é "auto"
    */
   buttonsWidth?: number | string,
+  /**
+   * Espaçamento entre os botões
+   */
+  spacing?: number,
+  /**
+   * alinhamento horizontal
+   */
+  justifyContent?: string
 }
 
-const ButtonBox: React.FC<ButtonBoxProps> = ({
-  children,
-  buttonsWidth,
-  top,
-  right,
-  bottom,
-  left }) => {
-
-  const useStyles = makeStyles(theme => ({
-    box: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'flex-end',
-      paddingTop: theme.spacing(top),
-      paddingRight: theme.spacing(right),
-      paddingBottom: theme.spacing(bottom),
-      paddingLeft: theme.spacing(left),
-      '& > * ': {
-        marginLeft: theme.spacing(1),
-        width: buttonsWidth
-      }
+const useStyles = makeStyles<Theme, ButtonBoxProps>(theme => ({
+  box: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: props => props.justifyContent,
+    paddingTop: props => theme.spacing(props.top),
+    paddingRight: props => theme.spacing(props.right),
+    paddingBottom: props => theme.spacing(props.bottom),
+    paddingLeft: props => theme.spacing(props.left),
+    '& > * ': {
+      marginLeft: props => theme.spacing(props.spacing),
+      width: props => props.buttonsWidth
     }
-  }))
+  }
+}))
 
-  const classes = useStyles()
+const ButtonBox: React.FC<ButtonBoxProps> = (props) => {
+  const { children } = props
+  const classes = useStyles(props)
   return <Box className={classes.box}>
     {children}
   </Box>
@@ -66,7 +68,9 @@ ButtonBox.defaultProps = {
   top: 0,
   right: 0,
   bottom: 0,
-  left: 0
+  left: 0,
+  spacing: 1,
+  justifyContent: 'flex-end'
 }
 
 export default ButtonBox;

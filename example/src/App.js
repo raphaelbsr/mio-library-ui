@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
+  ActionDialog
   // ActionDialog,
   // LabelValue,
   // FullDialog,
   // TransferList,
-  AutoComplete,
+  // AutoComplete,
   // TelefoneTextField,
   // NumeroInscricaoTextField,
   // PasswordTextField
-  //PageHeader,
-  CurrencyTextField
+  // PageHeader
+  // CurrencyTextField
+  // ContentDivider
 } from 'mio-library-ui';
 
-import { makeStyles } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,40 +40,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const App = () => {
-  const estados = [
-    {
-      sigla: 'MG',
-      nome: 'Minas Gerais'
-    },
-    {
-      sigla: 'RJ',
-      nome: 'Rio de Janeiro'
-    },
-    {
-      sigla: 'SP',
-      nome: 'São Paulo'
-    }
-  ];
-  const handleSearch = query => {
-    console.log('QUERY ' + query);
-    // if (query) {
-    return estados.filter(estado => estado.nome.includes(query));
-    // }
-    // return estados;
-  };
-  const handleChange = (e, newValue) => {
-    // console.log(newValue);
-  };
-  const renderOption = estado => {
-    return `${estado.sigla} - ${estado.nome}`;
-  };
   return (
-    <AutoComplete
-      variant="contained"
-      onSearch={handleSearch}
-      onChange={handleChange}
-      renderOption={renderOption}
-    ></AutoComplete>
+    <ActionDialog title="ActionDialog" isOpen={true}>
+      Olá
+    </ActionDialog>
   );
 };
 

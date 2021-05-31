@@ -2,14 +2,18 @@ import React from 'react';
 import {
   Box,
   Typography,
-  Divider
+  Divider,
+  IconButton
 } from "@material-ui/core";
+import { ArrowBack as BackIcon } from '@material-ui/icons'
 import { makeStyles } from "@material-ui/core/styles";
 
 interface PageHeaderProps {
-  title: string,
+  title: string
   subtitle?: string
-  children?: React.ReactNode
+  children?: React.FC
+  onBack?: any
+  renderRight?: any
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -19,7 +23,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  boxSubtitle: {
+  leftContent: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  boxTitleSubtitle: {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
@@ -45,22 +55,46 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2)
 
   },
+  headerContent: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: '100%'
+  },
+  rightContent: {}
 }));
 
 const PageHeader: React.FC<PageHeaderProps> = (props) => {
   const classes = useStyles()
-  const { title, subtitle, children } = props
+  const { title, subtitle, children, onBack, renderRight } = props
   return (
     <React.Fragment>
       <Box className={classes.box}>
-        <Box className={classes.boxSubtitle}>
-          <Typography className={classes.title}>
-            {title}
-          </Typography>
-          {subtitle &&
-            <Typography className={classes.subtitle}>
-              {subtitle}
-            </Typography>}
+        <Box className={classes.headerContent}>
+          <Box className={classes.leftContent}>
+
+            {onBack && <Box>
+              <IconButton size="small" onClick={onBack}>
+                <BackIcon color="primary" />
+              </IconButton>
+            </Box>}
+
+            <Box className={classes.boxTitleSubtitle}>
+              <Typography className={classes.title}>
+                {title}
+              </Typography>
+              {subtitle &&
+                <Typography className={classes.subtitle}>
+                  {subtitle}
+                </Typography>}
+            </Box>
+
+          </Box>
+
+          {renderRight && <Box className={classes.rightContent}>
+            {renderRight}
+          </Box>}
         </Box>
         {children}
       </Box>

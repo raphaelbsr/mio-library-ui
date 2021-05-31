@@ -20,7 +20,7 @@ const obterErro = (name, validationErrors) => {
   return erroEncontrado.message
 }
 
-interface AutoComplete {
+interface AutoComplete2 {
   /**
    * renderOptions é uma função que recebe um item e retorna o componente que deve ser renderizado
    */
@@ -49,7 +49,7 @@ interface AutoComplete {
   multiple?: boolean;
 }
 
-const AutoComplete = ({
+const AutoComplete2 = ({
   name,
   validationErrors,
   renderOption,
@@ -128,7 +128,7 @@ const AutoComplete = ({
   )
 }
 
-AutoComplete.defaultProps = {
+AutoComplete2.defaultProps = {
   inputProps: { label: "Label", margin: "normal", variant: "outlined" },
   renderOption: ((option: any) => option),
   time: 500,
@@ -136,4 +136,4 @@ AutoComplete.defaultProps = {
   multiple: false
 }
 
-export default AutoComplete;
+export default AutoComplete2;

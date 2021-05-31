@@ -10,6 +10,7 @@ interface NumeroInscricaoTextFieldProps extends React.InputHTMLAttributes<React.
   mensagemDeErro?: string;
   value?: string;
   tipo?: TIPO_DOCUMENTO;
+  validationErrors?: any,
   // rest: any,
 }
 
@@ -23,6 +24,20 @@ export enum MASCARA {
   INTERMEDIARIA = "999.999.999-999",
   CPF = "999.999.999-99",
   CNPJ = "99.999.999/9999-99"
+}
+
+const obterErro = (name, validationErrors) => {
+  if (!validationErrors) return false
+
+  const { inner } = validationErrors
+  const erroEncontrado = inner.find((item) => {
+    const { path } = item
+    return name === path
+  })
+
+  if (!erroEncontrado) return false
+
+  return erroEncontrado.message
 }
 
 export const isValid = (numeroInscricao: string): IValidation => {
@@ -54,6 +69,8 @@ export const isValid = (numeroInscricao: string): IValidation => {
 
 const NumeroInscricaoTextField: React.FC<NumeroInscricaoTextFieldProps> = (
   {
+    name,
+    validationErrors,
     ehValido,
     mensagemDeErro,
     tipo,
@@ -129,6 +146,7 @@ const NumeroInscricaoTextField: React.FC<NumeroInscricaoTextFieldProps> = (
     };
   }
 
+  const validationMessage = obterErro(name, validationErrors)
   return (
     <React.Fragment>
       <MaskedTextField
@@ -141,6 +159,7 @@ const NumeroInscricaoTextField: React.FC<NumeroInscricaoTextFieldProps> = (
         {...rest}
       />
       {!validacao.ehValido && <ErrorMessage error={validacao.mensagemDeErro} />}
+      {validationMessage && <ErrorMessage error={validationMessage} />}
     </React.Fragment>
   )
 };

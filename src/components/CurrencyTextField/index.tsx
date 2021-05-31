@@ -1,21 +1,44 @@
 import React from 'react';
 import UnicefCurrencyTextField from '@unicef/material-ui-currency-textfield'
+import ErrorMessage from "../ErrorMessage";
 // import { Container } from './styles';
 
 interface CurrencyTextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
-
+  validationErrors?: any,
 }
 
-const CurrencyTextField: React.FC<CurrencyTextFieldProps> = ({ ...rest }) => {
-  return <UnicefCurrencyTextField
-    decimalCharacter=","
-    digitGroupSeparator="."
-    currencySymbol=""
-    decimalPlaces={2}
-    decimalPlacesShownOnFocus={2}
-    variant="outlined"
-    size="small"
-    {...rest} />
+const obterErro = (name, validationErrors) => {
+  if (!validationErrors) return false
+
+  const { inner } = validationErrors
+  const erroEncontrado = inner.find((item) => {
+    const { path } = item
+    return name === path
+  })
+
+  if (!erroEncontrado) return false
+
+  return erroEncontrado.message
+}
+
+const CurrencyTextField: React.FC<CurrencyTextFieldProps> = ({ name,
+  validationErrors, ...rest }) => {
+
+  const validationMessage = obterErro(name, validationErrors)
+
+  return <React.Fragment>
+    <UnicefCurrencyTextField
+      decimalCharacter=","
+      digitGroupSeparator="."
+      currencySymbol=""
+      decimalPlaces={2}
+      decimalPlacesShownOnFocus={2}
+      variant="outlined"
+      size="small"
+      {...rest} />
+    {validationMessage && <ErrorMessage error={validationMessage} />}
+  </React.Fragment>
+
 };
 
 export default CurrencyTextField;

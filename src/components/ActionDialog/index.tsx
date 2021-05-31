@@ -5,10 +5,14 @@ import {
   DialogContent as MuiDialogContent,
   DialogActions as MuiDialogActions,
   CircularProgress as MuiCircularProgress,
-  Button
+  DialogProps,
+  Button,
+  IconButton,
+  Icon
 } from '@material-ui/core';
-// import PropTypes from 'prop-types';
-// import { DialogProps } from '@material-ui/core/Dialog/'
+
+import { Close as CloseIcon } from '@material-ui/icons'
+
 import PageHeader from '../PageHeader';
 
 interface ActionProps {
@@ -30,7 +34,9 @@ interface ActionDialogProps {
   okLabel?: string,
   isOkProcessing?: boolean,
   customActions: React.ReactNode,
-  rest: ActionProps
+  dialogProps?: DialogProps
+  rest: ActionProps,
+  disableEnforceFocus: boolean
 }
 
 const Actions: React.FC<ActionProps> = props => {
@@ -54,12 +60,20 @@ const Actions: React.FC<ActionProps> = props => {
 };
 
 const ActionDialog: React.FC<ActionDialogProps> = props => {
-  const { isOpen, title, children, customActions, onClose, ...rest } = props;
+  const { isOpen, title, children, customActions, onClose, disableEnforceFocus, dialogProps, ...rest } = props;
   return (
-    <MuiDialog fullWidth maxWidth="sm" open={isOpen} onClose={onClose}>
-      {title && <MuiDialogTitle>
-        <PageHeader title={title}></PageHeader>
-      </MuiDialogTitle>}
+    <MuiDialog {...dialogProps} open={isOpen} onClose={onClose} disableEnforceFocus={disableEnforceFocus}>
+      {
+        title &&
+        <MuiDialogTitle>
+          <PageHeader
+            title={title}
+            renderRight={
+              <IconButton size="small" onClick={onClose}>
+                <CloseIcon fontSize="small" /></IconButton>
+            } />
+        </MuiDialogTitle>
+      }
       <MuiDialogContent>{children}</MuiDialogContent>
       {customActions ? customActions : <Actions {...props} {...rest} />}
     </MuiDialog>
@@ -69,7 +83,14 @@ const ActionDialog: React.FC<ActionDialogProps> = props => {
 ActionDialog.defaultProps = {
   okLabel: 'Ok',
   cancelLabel: 'Cancelar',
-  isOkProcessing: false
+  isOkProcessing: false,
+  disableEnforceFocus: false,
+  dialogProps: {
+    fullWidth: true,
+    maxWidth: "sm",
+    open: false
+  }
+
 };
 
 export default ActionDialog;
