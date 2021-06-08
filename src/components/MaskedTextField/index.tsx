@@ -21,22 +21,25 @@ interface MaskedTextFieldProps extends React.InputHTMLAttributes<HTMLInputElemen
       userInput: string,
       maskOptions: MaskOptions): InputState
   };
+  ref?: React.Ref<HTMLInputElement>;
   // rest: any
 }
-
-const MaskedTextField: React.FC<MaskedTextFieldProps> = ({
-  mask,
-  value,
-  onChange,
-  onBlur,
-  beforeMaskedValueChange,
-  disabled,
-  validation,
-  ...rest
-}) => {
+const MaskedTextField: React.FC<MaskedTextFieldProps> = React.forwardRef((props, ref?: React.Ref<HTMLInputElement>) => {
+  // (props) => {
+  const {
+    mask,
+    value,
+    onChange,
+    onBlur,
+    beforeMaskedValueChange,
+    disabled,
+    validation,
+    ...rest
+  } = props
 
   return (
     <InputMask
+      inputRef={ref}
       disabled={disabled}
       mask={mask}
       onChange={onChange}
@@ -45,12 +48,13 @@ const MaskedTextField: React.FC<MaskedTextFieldProps> = ({
       value={value} >
       {
         ({ inputProps }) => <TextField
+          // inputRef={ref}
           {...inputProps}
           {...rest} />
       }
     </InputMask>
-  );
-}
+  )
+})
 
 MaskedTextField.defaultProps = {
   disabled: false

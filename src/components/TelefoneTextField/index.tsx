@@ -70,7 +70,6 @@ const TelefoneTextField: React.FC<TelefoneTextFieldProps> = ({
 
     if (tipo === TIPO_TELEFONE.CELULAR) {
       setMask(MASCARA.CELULAR)
-      return
     }
   }
 
@@ -109,6 +108,7 @@ const TelefoneTextField: React.FC<TelefoneTextFieldProps> = ({
   const mensagemDeErro = obterErro(name, validationErrors);
   return <React.Fragment>
     <MaskedTextField
+      ref={null}
       mask={mask}
       beforeMaskedValueChange={tipo === TIPO_TELEFONE.INDEFINIDO && beforeMaskedValueChange}
       value={value}

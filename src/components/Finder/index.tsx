@@ -17,13 +17,14 @@ interface FinderProps extends React.InputHTMLAttributes<React.ReactFragment> {
   onSearch: { <T>(query: string): Array<T> };
   searching?: boolean;
   time?: number;
+  onClose?: any
 }
 
 const Finder: React.FC<FinderProps> = (props) => {
 
   const [isOpen, setIsOpen] = useState(false)
   const [growIn, setGrowIn] = useState(false)
-  const { onSearch, searching, time } = props
+  const { onSearch, onClose, searching, time } = props
 
   const debouncedHandleTextChange = useCallback(_.debounce(query => onSearch(query), time), [onSearch])
 
@@ -37,7 +38,10 @@ const Finder: React.FC<FinderProps> = (props) => {
   }
   const fecharCaixaDePesquisa = () => {
     setGrowIn(false)
-    setTimeout(() => { setIsOpen(false) }, 500)
+    setTimeout(() => {
+      setIsOpen(false);
+      onClose();
+    }, 500)
   }
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -88,6 +92,7 @@ const Finder: React.FC<FinderProps> = (props) => {
 
 Finder.defaultProps = {
   searching: false,
-  time: 500
+  time: 500,
+  onClose: () => { }
 }
 export default Finder;

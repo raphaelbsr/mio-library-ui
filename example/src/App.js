@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
-  ActionDialog
+  // ActionDialog
   // ActionDialog,
   // LabelValue,
   // FullDialog,
   // TransferList,
   // AutoComplete,
   // TelefoneTextField,
-  // NumeroInscricaoTextField,
+  formatarTelefone
+  // NumeroInscricaoTextField
   // PasswordTextField
   // PageHeader
   // CurrencyTextField
@@ -40,10 +41,24 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const App = () => {
+  const [inscricao, setInscricao] = useState('');
+
   return (
-    <ActionDialog title="ActionDialog" isOpen={true}>
-      Olá
-    </ActionDialog>
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
+    >
+      {formatarTelefone('3234214167')}
+      {/* <NumeroInscricaoTextField
+        value={inscricao}
+        onChange={e => setInscricao(e.target.value)}
+      /> */}
+    </div>
   );
 };
 

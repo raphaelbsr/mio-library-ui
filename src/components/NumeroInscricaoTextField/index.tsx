@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import MaskedTextField, { IValidation } from "../MaskedTextField";
 import ErrorMessage from "../ErrorMessage";
@@ -17,12 +17,15 @@ interface NumeroInscricaoTextFieldProps extends React.InputHTMLAttributes<React.
 export enum TIPO_DOCUMENTO {
   INDEFINIDO = "INDEFINIDO",
   CPF = "CPF",
-  CNPJ = "CNPJ"
+  CEI = "CEI",
+  CNPJ = "CNPJ",
 }
 
 export enum MASCARA {
-  INTERMEDIARIA = "999.999.999-999",
   CPF = "999.999.999-99",
+  INTERMEDIARIA = "999.999.999-999",
+  CEI = "99.999.999.999-9",
+  INTERMEDIARIA2 = "99.999.999.999-99",
   CNPJ = "99.999.999/9999-99"
 }
 
@@ -51,6 +54,14 @@ export const isValid = (numeroInscricao: string): IValidation => {
       mensagemDeErro: !cpfEhValido ? 'O CPF informado não é válido' : null
     }
   }
+
+  // if (numeroInscricaoParaValidar.length === 13) {
+  //   const ceiEhValido = cpf.isValid(numeroInscricaoParaValidar);
+  //   return {
+  //     ehValido: ceiEhValido,
+  //     mensagemDeErro: !ceiEhValido ? 'O CEI informado não é válido' : null
+  //   }
+  // }
 
   if (numeroInscricaoParaValidar.length === 14) {
     const cnpjEhValido = cnpj.isValid(numeroInscricaoParaValidar);
@@ -82,14 +93,10 @@ const NumeroInscricaoTextField: React.FC<NumeroInscricaoTextFieldProps> = (
     ehValido: true,
     mensagemDeErro: ''
   })
-
+  const textRef = useRef(null)
   useEffect(() => {
     definirMascara(value)
   }, [tipo])
-
-  // useEffect(() => {
-  //   validarNumeroInscricao(value)
-  // }, [value])
 
   const definirMascara = (numeroInscricao: string) => {
 
@@ -100,7 +107,6 @@ const NumeroInscricaoTextField: React.FC<NumeroInscricaoTextFieldProps> = (
 
     if (tipo === TIPO_DOCUMENTO.CNPJ) {
       setMask(MASCARA.CNPJ)
-      return
     }
 
   }
@@ -118,7 +124,6 @@ const NumeroInscricaoTextField: React.FC<NumeroInscricaoTextFieldProps> = (
   }
 
   const beforeMaskedValueChange = (newState: any, oldState: any, userInput: any) => {
-
     let selection = newState.selection;
     if (userInput) {
       let newStart = newState.selection.start;
@@ -136,12 +141,21 @@ const NumeroInscricaoTextField: React.FC<NumeroInscricaoTextFieldProps> = (
       }
 
       if (newStart === 15 && oldStart === 14) {
+        setMask(MASCARA.INTERMEDIARIA2)
+        setTimeout(() => {
+          textRef.current.selectionStart = 16
+          textRef.current.selectionEnd = 16
+        }, 100)
+      }
+
+      if (newStart === 17 && oldStart === 16) {
         setMask(MASCARA.CNPJ)
       }
+
     }
-    const { value } = newState;
+    const { value: nValue } = newState;
     return {
-      value,
+      value: nValue,
       selection
     };
   }
@@ -150,6 +164,7 @@ const NumeroInscricaoTextField: React.FC<NumeroInscricaoTextFieldProps> = (
   return (
     <React.Fragment>
       <MaskedTextField
+        ref={textRef}
         mask={mask}
         value={value}
         onBlur={(e) => {
