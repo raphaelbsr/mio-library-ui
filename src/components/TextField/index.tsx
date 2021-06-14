@@ -6,6 +6,7 @@ const obterErro = (name, validationErrors) => {
   if (!validationErrors) return false
 
   const { inner } = validationErrors
+  if (!inner) return false
   const erroEncontrado = inner.find((item) => {
     const { path } = item
     return name === path
@@ -20,7 +21,7 @@ const TextField = ({ name, validationErrors, ref, ...rest }) => {
   const mensagemDeErro = obterErro(name, validationErrors)
   return (
     <React.Fragment>
-      <MuiTextField name={name} {...rest}>        
+      <MuiTextField name={name} {...rest}>
       </MuiTextField>
       {mensagemDeErro && <ErrorMessage error={mensagemDeErro} />}
     </React.Fragment>

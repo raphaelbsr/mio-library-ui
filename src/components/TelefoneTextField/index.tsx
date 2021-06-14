@@ -35,6 +35,7 @@ const obterErro = (name: string, validationErrors: any) => {
     return false
 
   const { inner } = validationErrors
+  if (!inner) return false
   const erroEncontrado = inner.find(item => {
     const { path } = item
     return name === path
