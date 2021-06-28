@@ -8,41 +8,21 @@ import {
   // TransferList,
   // AutoComplete,
   // TelefoneTextField,
-  formatarTelefone
+  // formatarTelefone
   // NumeroInscricaoTextField
   // PasswordTextField
   // PageHeader
   // CurrencyTextField
   // ContentDivider
+  Button,
+  Finder
 } from 'mio-library-ui';
 
 import { Box, makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    '& label.Mui-focused': {
-      color: '#1A9'
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: '#1A9'
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#1A9'
-      },
-      '&:hover fieldset': {
-        borderColor: '#1A9'
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#1A9'
-      }
-    }
-  }
-}));
-
 const App = () => {
   const [inscricao, setInscricao] = useState('');
-
+  // const iRef = useRef(null);
   return (
     <div
       style={{
@@ -53,7 +33,15 @@ const App = () => {
         alignItems: 'center'
       }}
     >
-      {formatarTelefone('3234214167')}
+      {/* <Button
+        onClick={() => {
+          console.log(iRef);
+        }}
+      >
+        Teste Ref
+      </Button> */}
+      <Finder isOpen={true} showIcons={true} label="Buscar" />
+      {/* {formatarTelefone('3234214167')} */}
       {/* <NumeroInscricaoTextField
         value={inscricao}
         onChange={e => setInscricao(e.target.value)}

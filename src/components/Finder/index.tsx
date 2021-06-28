@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Grow,
   IconButton,
@@ -15,16 +15,25 @@ import _ from "lodash";
 
 interface FinderProps extends React.InputHTMLAttributes<React.ReactFragment> {
   onSearch: { <T>(query: string): Array<T> };
+  label?: string;
+  variant?: "standard" | "filled" | "outlined";
+  isOpen?: boolean;
+  showIcons?: boolean;
   searching?: boolean;
   time?: number;
   onClose?: any
 }
 
-const Finder: React.FC<FinderProps> = (props) => {
+const Finder: React.FC<FinderProps> = React.forwardRef((props, ref?: React.Ref<HTMLInputElement>) => {
 
+  const { onSearch, onClose, searching, time, isOpen: _isOpen, showIcons, label, variant } = props
   const [isOpen, setIsOpen] = useState(false)
   const [growIn, setGrowIn] = useState(false)
-  const { onSearch, onClose, searching, time } = props
+
+  useEffect(() => {
+    setIsOpen(_isOpen)
+    setGrowIn(_isOpen)
+  }, [_isOpen])
 
   const debouncedHandleTextChange = useCallback(_.debounce(query => onSearch(query), time), [onSearch])
 
@@ -54,21 +63,24 @@ const Finder: React.FC<FinderProps> = (props) => {
     {/* <KeyboardEventHandler
       handleKeys={['ctrl+p']}
       onKeyEvent={(key: string, e: React.KeyboardEvent<HTMLInputElement>) => abrirCaixaDePesquisa()} /> */}
-    <IconButton
+    {showIcons && <IconButton
       size="small"
       color="primary"
       onClick={abrirCaixaDePesquisa}>
       <SearchIcon fontSize="small" />
-    </IconButton>
+    </IconButton>}
     {isOpen &&
       <Grow in={growIn} timeout={{ appear: 500, enter: 500, exit: 500 }}>
         <TextField
           size="small"
-          onKeyDown={onKeyDown}
           fullWidth
+          variant={variant}
           autoFocus={true}
+          label={label}
+          onKeyDown={onKeyDown}
           onChange={handleTextChange}
-          InputProps={{
+          inputRef={ref}
+          InputProps={showIcons && {
             endAdornment: (
               <InputAdornment position="end">
                 {
@@ -88,11 +100,15 @@ const Finder: React.FC<FinderProps> = (props) => {
       </Grow>
     }
   </React.Fragment>
-};
+})
 
 Finder.defaultProps = {
+  isOpen: false,
+  showIcons: true,
   searching: false,
   time: 500,
-  onClose: () => { }
+  label: '',
+  variant: 'standard',
+  onClose: () => { return null },
 }
 export default Finder;

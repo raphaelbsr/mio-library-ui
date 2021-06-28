@@ -5,7 +5,7 @@ import { Box, Divider, Typography, Tooltip } from '@material-ui/core'
 import { Info as InfoIcon } from '@material-ui/icons'
 
 
-interface ContentDivider {
+interface IContentDivider {
   /**
    * Título da seção
    */
@@ -43,7 +43,7 @@ interface ContentDivider {
 }
 
 
-const ContentDivider: React.FC<ContentDivider> = ({
+const ContentDivider: React.FC<IContentDivider> = ({
   title,
   top,
   right,
