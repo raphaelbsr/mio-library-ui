@@ -13,7 +13,7 @@ interface PageHeaderProps {
   subtitle?: string
   children?: React.FC
   onBack?: any
-  renderRight?: any
+  renderRight?: boolean | React.ReactNode
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -103,5 +103,9 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
   )
 
 };
+
+PageHeader.defaultProps = {
+  renderRight: false
+}
 
 export default PageHeader;

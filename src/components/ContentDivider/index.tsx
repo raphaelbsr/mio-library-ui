@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, Divider, Typography, Tooltip } from '@material-ui/core'
+import { Box, Divider, Typography, Tooltip, Theme } from '@material-ui/core'
 import { Info as InfoIcon } from '@material-ui/icons'
 
 
@@ -30,60 +30,73 @@ interface IContentDivider {
    * paddingLeft
    */
   left?: number,
+
+  /**
+   * Renderiza algum componente a direita do seperador
+   *
+   */
+  renderLeft?: any
+
   /**
    * Renderiza algum componente a direita do seperador
    *
    */
   renderRight?: any
 
+  showDivider?: boolean
+
   showTooltip?: boolean
   tooltipIcon?: any
   tooltipText?: string
-  tooltipRenderer: any
+  tooltipRenderer: any,
+  titleProps?: any
 }
 
+const useStyles = makeStyles<Theme, IContentDivider>(theme => ({
+  box: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingTop: props => theme.spacing(props.top),
+    paddingRight: props => theme.spacing(props.right),
+    paddingBottom: props => theme.spacing(props.bottom),
+    paddingLeft: props => theme.spacing(props.left),
+  },
+  title: {
+    fontSize: 14,
+    fontWeight: "bold",
+    display: "block",
+    color: "#999",
+  },
+  divider: {
+    flex: 1,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1)
+  }
+}))
 
-const ContentDivider: React.FC<IContentDivider> = ({
-  title,
-  top,
-  right,
-  bottom,
-  left,
-  renderRight,
-  showTooltip,
-  tooltipIcon,
-  tooltipText,
-  tooltipRenderer }) => {
-
-  const useStyles = makeStyles((theme) => ({
-    box: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      paddingTop: theme.spacing(top),
-      paddingRight: theme.spacing(right),
-      paddingBottom: theme.spacing(bottom),
-      paddingLeft: theme.spacing(left),
-    },
-    title: {
-      fontSize: 14,
-      fontWeight: "bold",
-      display: "block",
-      color: "#999",
-    },
-    divider: {
-      flex: 1,
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1)
-    }
-  }))
-
-  const classes = useStyles();
+const ContentDivider: React.FC<IContentDivider> = (props) => {
+  const {
+    title,
+    renderRight,
+    renderLeft,
+    showTooltip,
+    tooltipIcon,
+    tooltipText,
+    tooltipRenderer,
+    showDivider,
+    titleProps
+  } = props
+  const classes = useStyles(props);
   return <Box className={classes.box}>
+    {renderLeft}
     {showTooltip && tooltipRenderer && tooltipRenderer}
     {showTooltip && !tooltipRenderer && <Tooltip title={tooltipText}>{tooltipIcon}</Tooltip>}
-    {title && <Typography className={classes.title} variant="h6" component="h6">{title}</Typography>}
-    <Divider className={classes.divider} />
+    {title && <Typography className={classes.title} variant="h6" component="h6" {...titleProps}>{title}</Typography>}
+    {
+      showDivider && <Divider className={classes.divider} />
+    }
+
     {renderRight}
   </Box>
 };
@@ -95,5 +108,7 @@ ContentDivider.defaultProps = {
   left: 0,
   showTooltip: false,
   tooltipIcon: <InfoIcon fontSize="small" />,
+  showDivider: true,
+  titleProps: {}
 }
 export default ContentDivider;

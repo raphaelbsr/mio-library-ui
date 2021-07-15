@@ -16,6 +16,7 @@ export { default as ContentContainer } from './components/ContentContainer';
 export { default as ContentDivider } from './components/ContentDivider';
 export { default as TextField } from './components/TextField';
 export { default as CurrencyTextField } from './components/CurrencyTextField';
+export { default as DataTable } from './components/DataTable';
 
 
 export * from './utils'

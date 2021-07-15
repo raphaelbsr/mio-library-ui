@@ -899,7 +899,9 @@ const App = () => {
         alignItems: 'center'
       }}
     >
-      <DataTable data={fakeData} columns={columns} />
+      <Box>
+        <DataTable data={fakeData} columns={columns} />
+      </Box>
     </div>
   );
 };

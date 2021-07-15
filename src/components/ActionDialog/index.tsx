@@ -8,12 +8,12 @@ import {
   DialogProps,
   Button,
   IconButton,
-  // Icon
 } from '@material-ui/core';
 
 import { Close as CloseIcon } from '@material-ui/icons'
 
 import PageHeader from '../PageHeader';
+import ButtonBox from '../ButtonBox';
 
 interface ActionProps {
   onClose: any,
@@ -37,7 +37,8 @@ interface ActionDialogProps {
   customActions: React.ReactNode,
   dialogProps?: DialogProps
   rest: ActionProps,
-  disableEnforceFocus: boolean
+  disableEnforceFocus: boolean,
+  renderRight?: boolean | React.ReactNode,
 }
 
 const Actions: React.FC<ActionProps> = props => {
@@ -61,7 +62,7 @@ const Actions: React.FC<ActionProps> = props => {
 };
 
 const ActionDialog: React.FC<ActionDialogProps> = props => {
-  const { isOpen, title, subtitle, children, customActions, onClose, disableEnforceFocus, dialogProps, ...rest } = props;
+  const { isOpen, title, subtitle, children, customActions, onClose, disableEnforceFocus, dialogProps, renderRight, ...rest } = props;
   return (
     <MuiDialog {...dialogProps} open={isOpen} onClose={onClose} disableEnforceFocus={disableEnforceFocus}>
       {
@@ -71,8 +72,12 @@ const ActionDialog: React.FC<ActionDialogProps> = props => {
             title={title}
             subtitle={subtitle}
             renderRight={
-              <IconButton size="small" onClick={onClose}>
-                <CloseIcon fontSize="small" /></IconButton>
+              <ButtonBox spacing={1}>
+                {renderRight && renderRight}
+                <IconButton size="small" onClick={onClose}>
+                  <CloseIcon fontSize="small" />
+                </IconButton>
+              </ButtonBox>
             } />
         </MuiDialogTitle>
       }
@@ -92,8 +97,8 @@ ActionDialog.defaultProps = {
     maxWidth: "sm",
     open: false
   },
-  subtitle: null
-
+  subtitle: null,
+  renderRight: false
 };
 
 export default ActionDialog;
