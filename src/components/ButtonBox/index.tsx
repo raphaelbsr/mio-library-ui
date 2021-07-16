@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/styles'
 
 interface ButtonBoxProps {
   children: React.ReactNode,
