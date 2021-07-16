@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
-import { Box, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
+import { Box, Typography, Theme } from '@material-ui/core';
 
 interface LabelValueProps {
   label: string,
@@ -9,7 +9,7 @@ interface LabelValueProps {
 }
 
 const LabelValue: React.FC<LabelValueProps> = ({ label, value, valueComponent }) => {
-  const useStyles = makeStyles(theme => ({
+  const useStyles = makeStyles<Theme>(theme => ({
     box: {
       display: 'flex',
       flexDirection: 'row',

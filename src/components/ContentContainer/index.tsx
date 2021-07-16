@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core';
+import { Theme } from "@material-ui/core";
 // import { BoxProps } from "@material-ui/core/Box";
 
 import { Box } from '@material-ui/core'
@@ -9,7 +10,7 @@ interface ContentContainerProps {
 
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles<Theme>((theme) => ({
   contentContainer: {
     padding: theme.spacing(2)
   }

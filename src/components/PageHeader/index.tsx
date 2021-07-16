@@ -3,10 +3,11 @@ import {
   Box,
   Typography,
   Divider,
-  IconButton
+  IconButton,
+  Theme
 } from "@material-ui/core";
 import { ArrowBack as BackIcon } from '@material-ui/icons'
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core';
 
 interface PageHeaderProps {
   title: string
@@ -16,7 +17,7 @@ interface PageHeaderProps {
   renderRight?: boolean | React.ReactNode
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles<Theme>((theme) => ({
   box: {
     display: "flex",
     flexDirection: "row",

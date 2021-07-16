@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import { TransitionProps } from '@material-ui/core/transitions';
@@ -8,6 +8,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import { Theme } from '@material-ui/core';
 
 interface FullDialogProps {
   isOpen: boolean,
@@ -21,7 +22,7 @@ interface FullDialogProps {
 //   return <Slide direction="up" ref={ref} {...rest}></Slide>;
 // });
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles<Theme>(theme => ({
   appBar: {
     position: 'relative'
   },

@@ -9,11 +9,12 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import MuiTablePagination from '@material-ui/core/TablePagination';
-import { withStyles, makeStyles, useTheme } from '@material-ui/styles';
+import { Theme } from '@material-ui/core';
+import { makeStyles, withStyles, useTheme } from '@material-ui/core';
 
 const defaultFooterStyles = {};
 
-const useStyles1 = makeStyles(theme => ({
+const useStyles1 = makeStyles<Theme>(theme => ({
   root: {
     flexShrink: 0,
     color: theme.palette.text.secondary,
@@ -23,7 +24,7 @@ const useStyles1 = makeStyles(theme => ({
 
 const TablePaginationActions = props => {
   const classes = useStyles1();
-  const theme = useTheme();
+  const theme: Theme = useTheme();
   const { count, page, rowsPerPage, onChangePage } = props;
 
   function handleFirstPageButtonClick(event) {
