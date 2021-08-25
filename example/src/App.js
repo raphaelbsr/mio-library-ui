@@ -14,9 +14,10 @@ import {
   // PageHeader
   // CurrencyTextField
   // ContentDivider
-  Button,
-  Finder,
-  DataTable
+  // Button,
+  // Finder,
+  // DataTable
+  TextField
 } from 'mio-library-ui';
 
 import { Box, makeStyles } from '@material-ui/core';
@@ -875,19 +876,8 @@ const fakeData = [
 ];
 
 const App = () => {
-  const [inscricao, setInscricao] = useState('');
+  const [value, setValue] = useState('');
   // const iRef = useRef(null);
-
-  const columns = [
-    {
-      name: 'first_name',
-      label: 'First Name'
-    },
-    {
-      name: 'last_name',
-      label: 'Last Name'
-    }
-  ];
 
   return (
     <div
@@ -900,7 +890,12 @@ const App = () => {
       }}
     >
       <Box>
-        <DataTable data={fakeData} columns={columns} />
+        <TextField
+          onlyNumber={true}
+          separator="."
+          value={value}
+          onChange={e => setValue(e.target.value)}
+        />
       </Box>
     </div>
   );

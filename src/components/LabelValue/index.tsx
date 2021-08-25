@@ -38,14 +38,14 @@ const LabelValue: React.FC<LabelValueProps> = (props) => {
   const classes = useStyles(props);
   return (
     <Box className={classes.box}>
-      <Typography className={classes.label} variant="body2">
+      <div className={classes.label} >
         {label}
         {showSeparator && separator}
-      </Typography>
+      </div>
       {showDivider && <Divider style={{ flex: 1 }} />}
-      <Typography className={classes.value} variant="body2">
+      <div className={classes.value}>
         {value}
-      </Typography>
+      </div>
       {/* <Typography
         className={classes.value}
         variant="subtitle1"

@@ -22,13 +22,13 @@ const obterErro = (name, validationErrors) => {
   return erroEncontrado.message
 }
 
-const CurrencyTextField: React.FC<CurrencyTextFieldProps> = ({ name,
-  validationErrors, ...rest }) => {
-
+const CurrencyTextField: React.FC<CurrencyTextFieldProps> = React.forwardRef((props, ref?: React.Ref<HTMLInputElement>) => {
+  const { name, validationErrors, ...rest } = props
   const validationMessage = obterErro(name, validationErrors)
 
   return <React.Fragment>
     <UnicefCurrencyTextField
+      inputRef={ref}
       decimalCharacter=","
       digitGroupSeparator="."
       currencySymbol=""
@@ -40,6 +40,6 @@ const CurrencyTextField: React.FC<CurrencyTextFieldProps> = ({ name,
     {validationMessage && <ErrorMessage error={validationMessage} />}
   </React.Fragment>
 
-};
+});
 
 export default CurrencyTextField;
