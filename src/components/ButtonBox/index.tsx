@@ -37,6 +37,10 @@ interface ButtonBoxProps {
    * alinhamento horizontal
    */
   justifyContent?: string
+  /**
+   * tamanho horizontal
+   */
+  width?: number | string
 }
 
 const useStyles = makeStyles<Theme, ButtonBoxProps>(theme => ({
@@ -48,6 +52,7 @@ const useStyles = makeStyles<Theme, ButtonBoxProps>(theme => ({
     paddingRight: props => theme.spacing(props.right),
     paddingBottom: props => theme.spacing(props.bottom),
     paddingLeft: props => theme.spacing(props.left),
+    width: props => props.width,
     '& > * ': {
       marginLeft: props => theme.spacing(props.spacing),
       width: props => props.buttonsWidth
@@ -70,7 +75,8 @@ ButtonBox.defaultProps = {
   bottom: 0,
   left: 0,
   spacing: 1,
-  justifyContent: 'flex-end'
+  justifyContent: 'flex-end',
+  width: '100%'
 }
 
 export default ButtonBox;

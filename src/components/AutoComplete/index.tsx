@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { TextField, CircularProgress } from '@material-ui/core';
+import { TextField, CircularProgress, IconButton } from '@material-ui/core';
+import { OpenInBrowser } from '@material-ui/icons'
 import { Autocomplete } from '@material-ui/lab';
 import ErrorMessage from "../ErrorMessage";
 import _ from "lodash";
@@ -60,6 +61,7 @@ const AutoComplete = ({
   time,
   inputProps,
   value,
+  onTransporter,
   ...rest
 }) => {
   const [options, setOptions] = useState([])
@@ -117,6 +119,11 @@ const AutoComplete = ({
                 <React.Fragment>
                   {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
                   {params.InputProps.endAdornment}
+                  {
+                    onTransporter && <IconButton size="small" color="default" onClick={onTransporter}>
+                      <OpenInBrowser />
+                    </IconButton>
+                  }
                 </React.Fragment>
               ),
             }}
@@ -134,7 +141,8 @@ AutoComplete.defaultProps = {
   renderOption: ((option: any) => option),
   time: 500,
   extraParams: undefined,
-  multiple: false
+  multiple: false,
+  onTransporter: false
 }
 
 export default AutoComplete;

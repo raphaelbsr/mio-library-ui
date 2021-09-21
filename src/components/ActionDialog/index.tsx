@@ -5,6 +5,7 @@ import {
   DialogContent as MuiDialogContent,
   DialogActions as MuiDialogActions,
   CircularProgress as MuiCircularProgress,
+  DialogContentProps,
   DialogProps,
   Button,
   IconButton,
@@ -36,6 +37,7 @@ interface ActionDialogProps {
   isOkProcessing?: boolean,
   customActions: React.ReactNode,
   dialogProps?: DialogProps
+  dialogContentProps?: DialogContentProps
   rest: ActionProps,
   disableEnforceFocus: boolean,
   renderRight?: boolean | React.ReactNode,
@@ -62,7 +64,7 @@ const Actions: React.FC<ActionProps> = props => {
 };
 
 const ActionDialog: React.FC<ActionDialogProps> = props => {
-  const { isOpen, title, subtitle, children, customActions, onClose, disableEnforceFocus, dialogProps, renderRight, ...rest } = props;
+  const { isOpen, title, subtitle, children, customActions, onClose, disableEnforceFocus, dialogProps, dialogContentProps, renderRight, ...rest } = props;
   return (
     <MuiDialog {...dialogProps} open={isOpen} onClose={onClose} disableEnforceFocus={disableEnforceFocus}>
       {
@@ -81,7 +83,7 @@ const ActionDialog: React.FC<ActionDialogProps> = props => {
             } />
         </MuiDialogTitle>
       }
-      <MuiDialogContent>{children}</MuiDialogContent>
+      <MuiDialogContent {...dialogContentProps}>{children}</MuiDialogContent>
       {customActions ? customActions : <Actions {...props} {...rest} />}
     </MuiDialog>
   );

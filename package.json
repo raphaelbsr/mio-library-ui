@@ -1,6 +1,6 @@
 {
   "name": "mio-library-ui",
-  "version": "1.1.55",
+  "version": "1.1.61",
   "description": "Componentes de interface de usuário baseado na material-ui para linha de aplicativos mio",
   "author": "raphaelbsr",
   "license": "MIT",
