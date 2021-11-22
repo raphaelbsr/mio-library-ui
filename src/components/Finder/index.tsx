@@ -4,13 +4,15 @@ import {
   IconButton,
   TextField,
   InputAdornment,
-  CircularProgress
+  CircularProgress,
+  Box,
+  TextFieldProps,
+  InputProps
 } from '@material-ui/core';
 import {
   Search as SearchIcon,
   Close as CloseIcon
 } from "@material-ui/icons/";
-// import KeyboardEventHandler from 'react-keyboard-event-handler';
 import _ from "lodash";
 
 interface FinderProps extends React.InputHTMLAttributes<React.ReactFragment> {
@@ -22,11 +24,12 @@ interface FinderProps extends React.InputHTMLAttributes<React.ReactFragment> {
   searching?: boolean;
   time?: number;
   onClose?: any
+  textFieldProps?: TextFieldProps
 }
 
 const Finder: React.FC<FinderProps> = React.forwardRef((props, ref?: React.Ref<HTMLInputElement>) => {
 
-  const { onSearch, onClose, searching, time, isOpen: _isOpen, showIcons, label, variant } = props
+  const { onSearch, onClose, searching, time, isOpen: _isOpen, showIcons, label, variant, textFieldProps } = props
   const [isOpen, setIsOpen] = useState(false)
   const [growIn, setGrowIn] = useState(false)
 
@@ -59,46 +62,74 @@ const Finder: React.FC<FinderProps> = React.forwardRef((props, ref?: React.Ref<H
     }
   };
 
+  let inputProps: InputProps = {
+  }
+
+  if (showIcons) {
+    inputProps.endAdornment =
+      <InputAdornment position="end">
+        {
+          !searching ? <IconButton
+            size="small"
+            color="primary"
+            onClick={fecharCaixaDePesquisa}>
+            <CloseIcon fontSize="small" />
+          </IconButton>
+            : <CircularProgress size={16} color="primary" />
+        }
+      </InputAdornment>
+  }
+
+  if (textFieldProps?.InputProps) {
+    inputProps = {
+      ...inputProps,
+      ...textFieldProps.InputProps
+    }
+  }
+
   return <React.Fragment>
     {/* <KeyboardEventHandler
       handleKeys={['ctrl+p']}
       onKeyEvent={(key: string, e: React.KeyboardEvent<HTMLInputElement>) => abrirCaixaDePesquisa()} /> */}
-    {showIcons && <IconButton
-      size="small"
-      color="primary"
-      onClick={abrirCaixaDePesquisa}>
-      <SearchIcon fontSize="small" />
-    </IconButton>}
-    {isOpen &&
-      <Grow in={growIn} timeout={{ appear: 500, enter: 500, exit: 500 }}>
-        <TextField
-          size="small"
-          fullWidth
-          variant={variant}
-          autoFocus={true}
-          label={label}
-          onKeyDown={onKeyDown}
-          onChange={handleTextChange}
-          inputRef={ref}
-          InputProps={showIcons && {
-            endAdornment: (
-              <InputAdornment position="end">
-                {
-                  !searching ? <IconButton
-                    size="small"
-                    color="primary"
-                    onClick={fecharCaixaDePesquisa}>
-                    <CloseIcon fontSize="small" />
-                  </IconButton>
-                    : <CircularProgress size={16} color="primary" />
-                }
-
-              </InputAdornment>
-            )
+    <Box style={
+      {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        // justifyContent: 'center',
+        alignContent: 'flex-end',
+        alignItems: 'center'
+      }}
+    >
+      {showIcons && <IconButton
+        style={
+          {
+            height: '100%',
           }}
-        />
-      </Grow>
-    }
+        size="small"
+        color="primary"
+        onClick={abrirCaixaDePesquisa}>
+        <SearchIcon fontSize="small" />
+      </IconButton>}
+
+      {isOpen &&
+        <Grow in={growIn} timeout={{ appear: 500, enter: 500, exit: 500 }}>
+          <TextField
+            size="small"
+            fullWidth
+            variant={variant}
+            autoFocus={true}
+            label={label}
+            onKeyDown={onKeyDown}
+            onChange={handleTextChange}
+            inputRef={ref}
+            {...textFieldProps}
+            InputProps={inputProps}
+          />
+        </Grow>
+      }
+    </Box>
   </React.Fragment>
 })
 

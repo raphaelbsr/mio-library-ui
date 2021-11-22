@@ -66,7 +66,7 @@ const useStyles = makeStyles<Theme, IContentDivider>(theme => ({
     fontSize: 14,
     fontWeight: "bold",
     display: "block",
-    color: "#999",
+    color: "#666666",
   },
   divider: {
     flex: 1,

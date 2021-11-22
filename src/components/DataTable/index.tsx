@@ -170,6 +170,9 @@ const DataTable: React.FC<DataTableProps> = props => {
 
   const handleChangePage = curPage => {
     setPagination({ ..._pagination, curPage });
+    if (options?.onChangePage) {
+      options.onChangePage(curPage)
+    }
   };
 
   const handleChangeRowsPerPage = pSize => {
