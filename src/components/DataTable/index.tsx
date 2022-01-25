@@ -3,7 +3,6 @@ import MUIDataTable from 'mui-datatables';
 import Skeleton from '@material-ui/lab/Skeleton';
 import CustomFooter from './components/CustomFooter';
 
-
 interface DataTableProps {
   isLoading?: boolean,
   data: any,
@@ -15,6 +14,7 @@ interface DataTableProps {
   sherlock?: any,
   fixedHeader?: boolean,
   pageSize?: number
+  autoDimension?: boolean
 }
 
 const defaultOptions = {
@@ -128,7 +128,8 @@ const DataTable: React.FC<DataTableProps> = props => {
     nativePagination,
     sherlock,
     fixedHeader,
-    pageSize
+    pageSize,
+    ...rest
   } = props;
   const [_data, setData] = useState([]);
   const [dataDisplay, setDataDisplay] = useState([]);
@@ -136,6 +137,10 @@ const DataTable: React.FC<DataTableProps> = props => {
     curPage: 0,
     pageSize: pageSize
   });
+  const [dimension, setDimension] = useState({
+    width: 500,
+    height: 500
+  })
 
   const options = { ...defaultOptions, ...optionsProps }
 
@@ -163,6 +168,19 @@ const DataTable: React.FC<DataTableProps> = props => {
     }
     setData(data);
   }, [data, sherlock]);
+
+  useEffect(() => {
+    const handleDimension = () => {
+
+    }
+    window.addEventListener('resize', handleDimension)
+    return () => {
+      if (handleDimension) {
+        window.removeEventListener('resize', handleDimension)
+      }
+    }
+
+  }, [])
 
   const changeDisplayedData = __data => {
     setDataDisplay([...__data]);
@@ -210,6 +228,7 @@ const DataTable: React.FC<DataTableProps> = props => {
       data={isLoading ? skeletonData : dataDisplay}
       columns={isLoading ? skeletonColumns : columns}
       options={options}
+      {...rest}
     />
   );
 };
@@ -220,7 +239,8 @@ DataTable.defaultProps = {
   data: [],
   sherlock: false,
   pageSize: 25,
-  fixedHeader: false
+  fixedHeader: false,
+  autoDimension: false
 };
 
 export default DataTable;
