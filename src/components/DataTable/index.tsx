@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import MUIDataTable from 'mui-datatables';
+import { LinearProgress } from '@material-ui/core'
 import Skeleton from '@material-ui/lab/Skeleton';
 import CustomFooter from './components/CustomFooter';
 
 
 interface DataTableProps {
   isLoading?: boolean,
+  isFetching?: boolean,
   data: any,
   columns: any,
   options: any,
@@ -120,6 +122,7 @@ const investigate = (data, sherlock) => {
 const DataTable: React.FC<DataTableProps> = props => {
   const {
     isLoading,
+    isFetching,
     data,
     columns,
     options: optionsProps,
@@ -205,12 +208,15 @@ const DataTable: React.FC<DataTableProps> = props => {
   };
 
   return (
-    <MUIDataTable
-      title={title}
-      data={isLoading ? skeletonData : dataDisplay}
-      columns={isLoading ? skeletonColumns : columns}
-      options={options}
-    />
+    <>
+      {isFetching && <LinearProgress />}
+      <MUIDataTable
+        title={title}
+        data={isLoading ? skeletonData : dataDisplay}
+        columns={isLoading ? skeletonColumns : columns}
+        options={options}
+      />
+    </>
   );
 };
 
