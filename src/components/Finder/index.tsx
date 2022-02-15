@@ -93,7 +93,7 @@ const Finder: React.FC<FinderProps> = React.forwardRef((props, ref?: React.Ref<H
       onKeyEvent={(key: string, e: React.KeyboardEvent<HTMLInputElement>) => abrirCaixaDePesquisa()} /> */}
     <Box style={
       {
-        width: '100%',
+        // width: '100%',
         height: '100%',
         display: 'flex',
         flexDirection: 'row',

@@ -5,18 +5,19 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import CustomFooter from './components/CustomFooter';
 
 interface DataTableProps {
-  isLoading?: boolean,
-  isFetching?: boolean,
-  data: any,
-  columns: any,
-  options: any,
-  title?: string,
-  pagination?: boolean,
-  nativePagination?: boolean,
-  sherlock?: any,
-  fixedHeader?: boolean,
+  isLoading?: boolean
+  isFetching?: boolean
+  data: any
+  columns: any
+  options: any
+  title?: string
+  pagination?: boolean
+  nativePagination?: boolean
+  sherlock?: any
+  fixedHeader?: boolean
   pageSize?: number
   autoDimension?: boolean
+  orderBy: string
 }
 
 const defaultOptions = {
@@ -132,6 +133,7 @@ const DataTable: React.FC<DataTableProps> = props => {
     sherlock,
     fixedHeader,
     pageSize,
+    orderBy,
     ...rest
   } = props;
   const [_data, setData] = useState([]);
@@ -165,11 +167,11 @@ const DataTable: React.FC<DataTableProps> = props => {
     if (sherlock) {
       const investigated = investigate(data, sherlock);
       if (investigated) {
-        setData(investigated);
+        setDataWithSort(investigated);
         return;
       }
     }
-    setData(data);
+    setDataWithSort(data);
   }, [data, sherlock]);
 
   useEffect(() => {
@@ -184,6 +186,31 @@ const DataTable: React.FC<DataTableProps> = props => {
     }
 
   }, [])
+
+  const setDataWithSort = (_data) => {
+
+    if (orderBy) {
+
+      let order = 'asc'
+
+      const splited = orderBy.split(" ")
+      const sortName = splited[0]
+
+      if (splited[1]) {
+        order = splited[1]
+      }
+
+      const sorted = _data.sort((a, b) => {
+        return (a[sortName] < b[sortName] ? -1 : 1) * (order === 'desc' ? 1 : -1);
+      });
+
+      console.log('groupBy', sortName, order)
+      console.log('sorted', sorted)
+      setData(sorted)
+      return
+    }
+    setData(_data)
+  }
 
   const changeDisplayedData = __data => {
     setDataDisplay([...__data]);

@@ -1588,6 +1588,24 @@
     react-is "^16.8.0 || ^17.0.0"
     react-transition-group "^4.4.0"
 
+"@material-ui/core@^4.11.3":
+  version "4.12.3"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.12.3.tgz#80d665caf0f1f034e52355c5450c0e38b099d3ca"
+  integrity sha512-sdpgI/PL56QVsEJldwEe4FFaFTLUqN+rd7sSZiRCdx2E/C7z5yK0y/khAWVBH24tXwto7I1hCzNWfJGZIYJKnw==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    "@material-ui/styles" "^4.11.4"
+    "@material-ui/system" "^4.12.1"
+    "@material-ui/types" "5.1.0"
+    "@material-ui/utils" "^4.11.2"
+    "@types/react-transition-group" "^4.2.0"
+    clsx "^1.0.4"
+    hoist-non-react-statics "^3.3.2"
+    popper.js "1.16.1-lts"
+    prop-types "^15.7.2"
+    react-is "^16.8.0 || ^17.0.0"
+    react-transition-group "^4.4.0"
+
 "@material-ui/icons@4.9.1":
   version "4.9.1"
   resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.9.1.tgz#fdeadf8cb3d89208945b33dbc50c7c616d0bd665"
@@ -1628,7 +1646,7 @@
     jss-plugin-vendor-prefixer "^10.5.1"
     prop-types "^15.7.2"
 
-"@material-ui/system@^4.11.3":
+"@material-ui/system@^4.11.3", "@material-ui/system@^4.12.1":
   version "4.12.1"
   resolved "https://registry.yarnpkg.com/@material-ui/system/-/system-4.12.1.tgz#2dd96c243f8c0a331b2bb6d46efd7771a399707c"
   integrity sha512-lUdzs4q9kEXZGhbN7BptyiS1rLNHe6kG9o8Y307HCvF4sQxbCgpL2qi+gUk+yI8a2DNk48gISEQxoxpgph0xIw==
@@ -2094,6 +2112,15 @@
   integrity sha512-U5icWpv7YnZYGsN4/cmh3WD2onMY0aJIiTE6+51TwJCttdHvtCYmkBNOobHlXwrJRL0nkH9jH4kD+1FAdMN4Tg==
   dependencies:
     "@types/node" "*"
+
+"@types/mui-datatables@^3.7.7":
+  version "3.7.7"
+  resolved "https://registry.yarnpkg.com/@types/mui-datatables/-/mui-datatables-3.7.7.tgz#477a09fe55041dce82a1ff8b1617ce55c8325596"
+  integrity sha512-NRegWPE6gYuT7DK4oDHZcvMuobndAtQyPIGHnEBlTA4nq954ZT40xLZeNzcoIEIrfgsHSjkORvUqX8149a0fwA==
+  dependencies:
+    "@material-ui/core" "^4.11.3"
+    "@material-ui/types" "5.1.0"
+    "@types/react" "*"
 
 "@types/node-fetch@2":
   version "2.5.11"
