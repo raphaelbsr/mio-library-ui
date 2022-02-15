@@ -9,7 +9,8 @@
     "prop-types": "^15.6.2",
     "react": "link:../node_modules/react",
     "react-dom": "^16.0.0",
-    "react-scripts": "^1.1.4"
+    "react-scripts": "^1.1.4",
+    "mui-datatables": "^3.8.2"
   },
   "scripts": {
     "start": "react-scripts start",
