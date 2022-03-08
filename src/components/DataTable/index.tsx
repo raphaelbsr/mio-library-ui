@@ -17,7 +17,8 @@ interface DataTableProps {
   fixedHeader?: boolean
   pageSize?: number
   autoDimension?: boolean
-  orderBy: string
+  orderBy: string,
+  sortParser?: any
 }
 
 const defaultOptions = {
@@ -134,6 +135,7 @@ const DataTable: React.FC<DataTableProps> = props => {
     fixedHeader,
     pageSize,
     orderBy,
+    sortParser,
     ...rest
   } = props;
   const [_data, setData] = useState([]);
@@ -161,9 +163,33 @@ const DataTable: React.FC<DataTableProps> = props => {
     }
     changeDisplayedData(__data);
     //eslint-disable-next-line
-  }, [_data, pagination, _pagination]);
+  }, [_data, pagination, _pagination, orderBy]);
 
   useEffect(() => {
+
+    const setDataWithSort = (_data) => {
+
+      if (orderBy) {
+
+        let order = 'asc'
+
+        const splited = orderBy.split(" ")
+        const sortName = splited[0]
+
+        if (splited[1]) {
+          order = splited[1]
+        }
+
+        const sorted = _data.sort((a, b) => {
+          return (sortParser(a[sortName]) < sortParser(b[sortName]) ? -1 : 1) * (order === 'desc' ? 1 : -1);
+        });
+
+        setData(sorted)
+        return
+      }
+      setData(_data)
+    }
+
     if (sherlock) {
       const investigated = investigate(data, sherlock);
       if (investigated) {
@@ -172,7 +198,7 @@ const DataTable: React.FC<DataTableProps> = props => {
       }
     }
     setDataWithSort(data);
-  }, [data, sherlock]);
+  }, [data, sherlock, orderBy]);
 
   useEffect(() => {
     const handleDimension = () => {
@@ -187,30 +213,7 @@ const DataTable: React.FC<DataTableProps> = props => {
 
   }, [])
 
-  const setDataWithSort = (_data) => {
 
-    if (orderBy) {
-
-      let order = 'asc'
-
-      const splited = orderBy.split(" ")
-      const sortName = splited[0]
-
-      if (splited[1]) {
-        order = splited[1]
-      }
-
-      const sorted = _data.sort((a, b) => {
-        return (a[sortName] < b[sortName] ? -1 : 1) * (order === 'desc' ? 1 : -1);
-      });
-
-      console.log('groupBy', sortName, order)
-      console.log('sorted', sorted)
-      setData(sorted)
-      return
-    }
-    setData(_data)
-  }
 
   const changeDisplayedData = __data => {
     setDataDisplay([...__data]);
@@ -273,7 +276,8 @@ DataTable.defaultProps = {
   sherlock: false,
   pageSize: 25,
   fixedHeader: false,
-  autoDimension: false
+  autoDimension: false,
+  sortParser: (d) => d
 };
 
 export default DataTable;

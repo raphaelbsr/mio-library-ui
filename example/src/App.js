@@ -38,6 +38,7 @@ const App = () => {
 
   const data = [
     {
+      'valor': "23,89",
       "uuid": "5e53e9c8a10a4700118c590e",
       "_id": {
         "$oid": "5e53e9c8a10a4700118c590e"

@@ -34,6 +34,7 @@ const MaskedTextField: React.FC<MaskedTextFieldProps> = React.forwardRef((props,
     beforeMaskedValueChange,
     disabled,
     validation,
+    name,
     ...rest
   } = props
 
@@ -45,7 +46,8 @@ const MaskedTextField: React.FC<MaskedTextFieldProps> = React.forwardRef((props,
       onChange={onChange}
       onBlur={onBlur}
       beforeMaskedValueChange={beforeMaskedValueChange}
-      value={value} >
+      value={value}
+      name={name} >
       {
         ({ inputProps }) => <TextField
           // inputRef={ref}
